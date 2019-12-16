@@ -1,0 +1,73 @@
+{
+  "name": "cpp-types",
+  "version": "1.0.0",
+  "description": "Emulation C++ (cpp) data types in TypeScript.",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "keywords": [
+    "cpp",
+    "types",
+    "int",
+    "short",
+    "float",
+    "char"
+  ],
+  "author": "only-exlight",
+  "homepage": "https://github.com/Code-of-Power/cpp-types",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Code-of-Power/cpp-types"
+  },
+  "bugs": {
+    "url": "https://github.com/Code-of-Power/cpp-types/issues"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^24.0.23",
+    "husky": "^3.1.0",
+    "jest": "^24.9.0",
+    "lint-staged": "^9.5.0",
+    "prettier": "^1.19.1",
+    "ts-jest": "^24.2.0",
+    "tslint": "^5.20.1",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.7.3"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
+    "rootDir": "src",
+    "testRegex": ".spec.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.(ts|tsx|js)": [
+      "prettier --write",
+      "tslint --fix -c tslint.json",
+      "git add"
+    ],
+    "*.spec.ts": [
+      "jest --passWithNoTests"
+    ]
+  }
+}
