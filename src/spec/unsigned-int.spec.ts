@@ -43,11 +43,15 @@ describe('Test UnsignedInt type', () => {
   });
 
   test('Or method', () => {
-    const unsigned_int = new UnsignedInt(10).or(10);
+    const unsigned_int = new UnsignedInt(10).or(8);
+    const or_res = 10 | 8;
+    expect(unsigned_int.value).toBe(or_res);
   });
 
   test('And method', () => {
-    const unsigned_int = new UnsignedInt(10).and(10);
+    const unsigned_int = new UnsignedInt(10).and(8);
+    const and_res = 10 & 8;
+    expect(unsigned_int.value).toBe(and_res);
   });
 
   test('More method', () => {

@@ -17,18 +17,18 @@ describe('Test UnsignedShortInt type', () => {
   });
 
   test('Sum method', () => {
-    const char = new UnsignedShortInt(100).add(new UnsignedShortInt(50));
-    expect(char.value).toBe(150);
+    const unsigned_short_int = new UnsignedShortInt(100).add(new UnsignedShortInt(50));
+    expect(unsigned_short_int.value).toBe(150);
   });
 
   test('Substract method', () => {
-    const char = new UnsignedShortInt(100).subtract(new UnsignedShortInt(50));
-    expect(char.value).toBe(50);
+    const unsigned_short_int = new UnsignedShortInt(100).subtract(new UnsignedShortInt(50));
+    expect(unsigned_short_int.value).toBe(50);
   });
 
   test('Multiply method', () => {
-    const char = new UnsignedShortInt(100).multiply(2);
-    expect(char.value).toBe(200);
+    const unsigned_short_int = new UnsignedShortInt(100).multiply(2);
+    expect(unsigned_short_int.value).toBe(200);
   });
 
   test('Devide method', () => {
@@ -38,22 +38,26 @@ describe('Test UnsignedShortInt type', () => {
   });
 
   test('Devide method is Float', () => {
-    const char = new UnsignedShortInt(100).devide(2);
-    const isFloat = char instanceof Float;
+    const unsigned_short_int = new UnsignedShortInt(100).devide(2);
+    const isFloat = unsigned_short_int instanceof Float;
     expect(isFloat).toBe(true);
   });
 
   test('Pow method', () => {
-    const char = new UnsignedShortInt(4).pow(2);
-    expect(char.value).toBe(16);
+    const unsigned_short_int = new UnsignedShortInt(4).pow(2);
+    expect(unsigned_short_int.value).toBe(16);
   });
 
   test('Or method', () => {
-    const char = new UnsignedShortInt(10).or(10);
+    const unsigned_short_int = new UnsignedShortInt(10).or(8);
+    const or_res = 10 | 8;
+    expect(unsigned_short_int.value).toBe(or_res);
   });
 
   test('And method', () => {
-    const char = new UnsignedShortInt(10).and(10);
+    const unsigned_short_int = new UnsignedShortInt(10).and(8);
+    const and_res = 10 & 8;
+    expect(unsigned_short_int.value).toBe(and_res);
   });
 
   test('More method', () => {

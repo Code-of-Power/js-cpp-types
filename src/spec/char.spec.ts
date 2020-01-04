@@ -43,11 +43,15 @@ describe('Test Char type', () => {
   });
 
   test('Or method', () => {
-    const char = new Char(10).or(10);
+    const char = new Char(10).or(8);
+    const or_res = 10 | 8;
+    expect(char.value).toBe(or_res);
   });
 
   test('And method', () => {
-    const char = new Char(10).and(10);
+    const char = new Char(10).and(8);
+    const and_res = 10 & 8;
+    expect(char.value).toBe(and_res);
   });
 
   test('More method', () => {

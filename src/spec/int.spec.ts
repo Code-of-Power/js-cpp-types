@@ -37,23 +37,21 @@ describe('Test Int type', () => {
     expect(int.value).toBeCloseTo(50);
   });
 
-  test('Devide method is Float', () => {
-    const int = new Int(100).devide(2);
-    const isFloat = int instanceof Float;
-    expect(isFloat).toBe(true);
-  });
-
   test('Pow method', () => {
     const int = new Int(4).pow(2);
     expect(int.value).toBe(16);
   });
 
   test('Or method', () => {
-    const int = new Int(10).or(10);
+    const int = new Int(10).or(8);
+    const or_res = 10 | 8;
+    expect(int.value).toBe(or_res);
   });
 
   test('And method', () => {
-    const int = new Int(10).and(10);
+    const int = new Int(10).and(8);
+    const and_res = 10 & 8;
+    expect(int.value).toBe(and_res);
   });
 
   test('More method', () => {
