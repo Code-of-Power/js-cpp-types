@@ -9,10 +9,12 @@ describe('Test Float type', () => {
   });
 
   test('Minimal range', () => {
+    expect(new Float(Float.RANGE[0]).value).toBe(Float.RANGE[0]);
     expect(() => new Float(Float.RANGE[0] - 1)).toThrow();
   });
 
   test('Maximum range', () => {
+    expect(new Float(Float.RANGE[1]).value).toBe(Float.RANGE[1]);
     expect(() => new Float(Float.RANGE[1] + 1)).toThrow();
   });
 

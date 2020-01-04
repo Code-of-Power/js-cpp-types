@@ -8,6 +8,16 @@ describe('Test LongFloat type', () => {
     expect(summ).toBeCloseTo(10);
   });
 
+  test('Minimal range', () => {
+    // expect(new LongFloat(LongFloat.RANGE[0]).value).toBe(LongFloat.RANGE[0]);
+    // expect(() => new LongFloat(LongFloat.RANGE[0] - 1)).toThrow();
+  });
+
+  test('Maximum range', () => {
+    // expect(new LongFloat(LongFloat.RANGE[1]).value).toBe(LongFloat.RANGE[1]);
+    // expect(() => new LongFloat(LongFloat.RANGE[1] + 1)).toThrow();
+  });
+
   test('Sum method', () => {
     const long_float = new LongFloat(100).add(new LongFloat(50));
     expect(long_float.value).toBe(150);

@@ -9,10 +9,12 @@ describe('Test ShortInt type', () => {
   });
 
   test('Minimal range', () => {
+    expect(new ShortInt(ShortInt.RANGE[0]).value).toBe(ShortInt.RANGE[0]);
     expect(() => new ShortInt(ShortInt.RANGE[0] - 1)).toThrow();
   });
 
   test('Maximum range', () => {
+    expect(new ShortInt(ShortInt.RANGE[1]).value).toBe(ShortInt.RANGE[1]);
     expect(() => new ShortInt(ShortInt.RANGE[1] + 1)).toThrow();
   });
 

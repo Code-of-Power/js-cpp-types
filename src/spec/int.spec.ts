@@ -1,4 +1,4 @@
-import { Float, Int } from '../';
+import { Char, Float, Int, LongFloat, ShortInt, UnsignedInt, UnsignedShortInt } from '../';
 
 describe('Test Int type', () => {
   test('Sum', () => {
@@ -9,10 +9,12 @@ describe('Test Int type', () => {
   });
 
   test('Minimal range', () => {
+    expect(new Int(Int.RANGE[0]).value).toBe(Int.RANGE[0]);
     expect(() => new Int(Int.RANGE[0] - 1)).toThrow();
   });
 
   test('Maximum range', () => {
+    expect(new Int(Int.RANGE[1]).value).toBe(Int.RANGE[1]);
     expect(() => new Int(Int.RANGE[1] + 1)).toThrow();
   });
 
@@ -72,5 +74,31 @@ describe('Test Int type', () => {
   test('Less or equal', () => {
     const result = new Int(10).less(10);
     expect(result).toBe(result);
+  });
+
+  test('Type conversion', () => {
+    const positiveVal = Int.RANGE[1];
+    const negativeVal = Int.RANGE[0];
+    const intPositive = new Int(positiveVal);
+    const intNegative = new Int(negativeVal);
+    // To Char
+    expect(intPositive.toChar()).toBeInstanceOf(Char);
+    expect(intPositive.toChar().value).toBe(Char.RANGE[1]);
+    expect(intNegative.toChar().value).toBe(Char.RANGE[0]);
+    // To ShortInt
+    expect(intPositive.toShortInt()).toBeInstanceOf(ShortInt);
+    expect(intPositive.toShortInt().value).toBe(ShortInt.RANGE[1]);
+    expect(intNegative.toShortInt().value).toBe(ShortInt.RANGE[0]);
+    // To UnsignedInt
+    expect(intPositive.toUnsignedInt()).toBeInstanceOf(UnsignedInt);
+    expect(intNegative.toUnsignedInt().value).toBe(UnsignedInt.RANGE[0]);
+
+    // To UnsignedShortInt
+    expect(intPositive.toUnsignedShortInt()).toBeInstanceOf(UnsignedShortInt);
+    // expect(intNegative.toUnsignedShortInt().value).toBe(UnsignedShortInt.RANGE[0]);
+
+    // To Float types
+    expect(intPositive.toFloat()).toBeInstanceOf(Float);
+    expect(intPositive.toLongFloat()).toBeInstanceOf(LongFloat);
   });
 });

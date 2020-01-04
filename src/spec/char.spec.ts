@@ -1,4 +1,11 @@
-import { Char, Float } from './../index';
+import {
+  Char,
+  Float,
+  Int,
+  ShortInt,
+  UnsignedInt,
+  UnsignedShortInt,
+} from './..';
 
 describe('Test Char type', () => {
   test('Sum', () => {
@@ -9,10 +16,12 @@ describe('Test Char type', () => {
   });
 
   test('Minimal range', () => {
+    expect(new Char(Char.RANGE[0]).value).toBe(Char.RANGE[0]);
     expect(() => new Char(Char.RANGE[0] - 1)).toThrow();
   });
 
   test('Maximum range', () => {
+    expect(new Char(Char.RANGE[1]).value).toBe(Char.RANGE[1]);
     expect(() => new Char(Char.RANGE[1] + 1)).toThrow();
   });
 
@@ -38,7 +47,7 @@ describe('Test Char type', () => {
   });
 
   test('Pow method', () => {
-    const char  = new Char(4).pow(2);
+    const char = new Char(4).pow(2);
     expect(char.value).toBe(16);
   });
 
@@ -74,4 +83,16 @@ describe('Test Char type', () => {
     expect(result).toBe(result);
   });
 
+  test('Type conversion', () => {
+    const val = 122;
+    const char = new Char(val);
+    expect(char.toInt()).toBeInstanceOf(Int);
+    expect(char.toInt().value).toBe(val);
+    expect(char.toShortInt()).toBeInstanceOf(ShortInt);
+    expect(char.toShortInt().value).toBe(val);
+    expect(char.toUnsignedInt()).toBeInstanceOf(UnsignedInt);
+    expect(char.toUnsignedInt().value).toBe(val);
+    expect(char.toUnsignedShortInt()).toBeInstanceOf(UnsignedShortInt);
+    expect(char.toUnsignedShortInt().value).toBe(val);
+  });
 });

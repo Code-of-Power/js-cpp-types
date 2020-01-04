@@ -9,20 +9,30 @@ describe('Test UnsignedShortInt type', () => {
   });
 
   test('Minimal range', () => {
+    expect(new UnsignedShortInt(UnsignedShortInt.RANGE[0]).value).toBe(
+      UnsignedShortInt.RANGE[0],
+    );
     expect(() => new UnsignedShortInt(UnsignedShortInt.RANGE[0] - 1)).toThrow();
   });
 
   test('Maximum range', () => {
+    expect(new UnsignedShortInt(UnsignedShortInt.RANGE[1]).value).toBe(
+      UnsignedShortInt.RANGE[1],
+    );
     expect(() => new UnsignedShortInt(UnsignedShortInt.RANGE[1] + 1)).toThrow();
   });
 
   test('Sum method', () => {
-    const unsigned_short_int = new UnsignedShortInt(100).add(new UnsignedShortInt(50));
+    const unsigned_short_int = new UnsignedShortInt(100).add(
+      new UnsignedShortInt(50),
+    );
     expect(unsigned_short_int.value).toBe(150);
   });
 
   test('Substract method', () => {
-    const unsigned_short_int = new UnsignedShortInt(100).subtract(new UnsignedShortInt(50));
+    const unsigned_short_int = new UnsignedShortInt(100).subtract(
+      new UnsignedShortInt(50),
+    );
     expect(unsigned_short_int.value).toBe(50);
   });
 

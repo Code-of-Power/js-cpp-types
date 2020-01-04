@@ -9,10 +9,16 @@ describe('Test UnsignedInt type', () => {
   });
 
   test('Minimal range', () => {
+    expect(new UnsignedInt(UnsignedInt.RANGE[0]).value).toBe(
+      UnsignedInt.RANGE[0],
+    );
     expect(() => new UnsignedInt(UnsignedInt.RANGE[0] - 1)).toThrow();
   });
 
   test('Maximum range', () => {
+    expect(new UnsignedInt(UnsignedInt.RANGE[1]).value).toBe(
+      UnsignedInt.RANGE[1],
+    );
     expect(() => new UnsignedInt(UnsignedInt.RANGE[1] + 1)).toThrow();
   });
 
