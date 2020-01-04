@@ -1,5 +1,4 @@
-import { Float } from '../classes/float';
-import { UnsignedShortInt } from '../classes/int';
+import { Float, UnsignedShortInt } from '../';
 
 describe('Test UnsignedShortInt type', () => {
   test('Sum', () => {

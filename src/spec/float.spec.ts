@@ -1,4 +1,4 @@
-import { Float } from '../classes/float';
+import { Float } from '../';
 
 describe('Test Float type', () => {
   test('Sum', () => {

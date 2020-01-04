@@ -1,4 +1,4 @@
-import { Float, LongFloat } from '../classes/float';
+import { Float, LongFloat } from '../';
 
 describe('Test LongFloat type', () => {
   test('Sum', () => {

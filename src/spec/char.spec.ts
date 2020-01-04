@@ -1,6 +1,4 @@
-import { Float } from '../classes/float';
-
-import { Char } from '../classes/int';
+import { Char, Float } from './../index';
 
 describe('Test Char type', () => {
   test('Sum', () => {

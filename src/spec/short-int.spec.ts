@@ -1,6 +1,4 @@
-import { Float } from '../classes/float';
-
-import { ShortInt } from '../classes/int';
+import { Float, ShortInt } from '../';
 
 describe('Test ShortInt type', () => {
   test('Sum', () => {

@@ -1,6 +1,4 @@
-import { Float } from '../classes/float';
-
-import { Int } from '../classes/int';
+import { Float, Int } from '../';
 
 describe('Test Int type', () => {
   test('Sum', () => {

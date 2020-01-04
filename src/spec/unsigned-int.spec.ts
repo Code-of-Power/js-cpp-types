@@ -1,6 +1,4 @@
-import { Float } from '../classes/float';
-
-import { UnsignedInt } from '../classes/int';
+import { Float, UnsignedInt } from '../';
 
 describe('Test UnsignedInt type', () => {
   test('Sum', () => {
