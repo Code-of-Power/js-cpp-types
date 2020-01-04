@@ -1,30 +1,30 @@
-import { Float } from 'classes/float';
 import { out_of_range, type_mismatch } from '../../functions';
 import { INumberType } from '../../interfaces';
+import { Float } from '../float';
 
 export abstract class AbstractIntType implements INumberType {
   protected abstract _range: [number, number];
   abstract _typeName: string;
-  protected _value = 0;
+  public _value = 0;
 
   constructor(v?: number) {
     this._value = v;
   }
 
   public toExponential(fractionDigits?: number): string {
-    return '';
+    return this._value.toExponential(fractionDigits);
   }
 
   public toFixed(fractionDigits?: number): string {
-    return '';
+    return this._value.toFixed(fractionDigits);
   }
 
   public toLocaleString(locales?: string | string[], options?: any): string {
-    return '';
+    return this._value.toLocaleString(locales, options);
   }
 
   public toPrecision(precision?: number) {
-    return '';
+    return this._value.toPrecision(precision);
   }
 
   get typeName() {
