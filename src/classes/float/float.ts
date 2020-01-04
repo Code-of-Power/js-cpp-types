@@ -10,7 +10,7 @@ export class Float extends AbstractFloatType {
 
   constructor(v?: number) {
     super(v);
-    if (v >= this._range[0] && v < this._range[1]) {
+    if (Float.is(v)) {
       this._value = v;
     } else {
       throw out_of_range(this._range, this._typeName, v);
@@ -22,7 +22,7 @@ export class Float extends AbstractFloatType {
   }
 
   public static is(v: number) {
-    return v >= Float.RANGE[0] && v < Float.RANGE[1];
+    return v >= Float.RANGE[0] && v <= Float.RANGE[1];
   }
 
   public add(term: INumberType | number): Float {

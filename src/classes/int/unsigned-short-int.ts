@@ -8,15 +8,14 @@ import { Char } from '../int';
 export class UnsignedShortInt extends AbstractIntType implements INumberType {
   static RANGE: [number, number] = [0, 65535];
   protected _range: [number, number] = UnsignedShortInt.RANGE;
-  public _typeName = 'ShortInt';
+  public _typeName = 'UnsignedShortInt';
 
   constructor(v?: number) {
     super(v);
-    const isInt = Number.isInteger(v);
-    if (v >= this._range[0] && v < this._range[1] && isInt) {
+    if (UnsignedShortInt.is(v)) {
       this._value = v;
     } else {
-      if (isInt) {
+      if (Number.isInteger(v)) {
         throw type_mismatch(this._typeName, this._typeName);
       } else {
         throw out_of_range(this._range, this._typeName, v);
@@ -31,15 +30,15 @@ export class UnsignedShortInt extends AbstractIntType implements INumberType {
   public static is(v: number) {
     return (
       v >= UnsignedShortInt.RANGE[0] &&
-      v < UnsignedShortInt.RANGE[1] &&
+      v <= UnsignedShortInt.RANGE[1] &&
       Number.isInteger(v)
     );
   }
 
   public toChar(): Char {
-    if (this._value < Char.RANGE[0]) {
+    if (this._value <= Char.RANGE[0]) {
       return new Char(Char.RANGE[0]);
-    } else if (this._value > Char.RANGE[1]) {
+    } else if (this._value >= Char.RANGE[1]) {
       return new Char(Char.RANGE[0]);
     } else {
       return new Char(this._value);
@@ -48,9 +47,9 @@ export class UnsignedShortInt extends AbstractIntType implements INumberType {
 
   public add(term: INumberType | number): Char {
     const value = this._value + term.valueOf();
-    if (value > Char.RANGE[1]) {
+    if (value >= Char.RANGE[1]) {
       return new Char(Char.RANGE[1]);
-    } else if (value < Char.RANGE[0]) {
+    } else if (value <= Char.RANGE[0]) {
       return new Char(Char.RANGE[0]);
     } else {
       return new Char(value);
@@ -59,9 +58,9 @@ export class UnsignedShortInt extends AbstractIntType implements INumberType {
 
   public subtract(subtrahend: INumberType | number): Char {
     const value = this._value - subtrahend.valueOf();
-    if (value > Char.RANGE[1]) {
+    if (value >= Char.RANGE[1]) {
       return new Char(Char.RANGE[1]);
-    } else if (value < Char.RANGE[0]) {
+    } else if (value <= Char.RANGE[0]) {
       return new Char(Char.RANGE[0]);
     } else {
       return new Char(value);
@@ -70,7 +69,7 @@ export class UnsignedShortInt extends AbstractIntType implements INumberType {
 
   public multiply(multiplier: INumberType | number) {
     const value = this._value * multiplier.valueOf();
-    if (value > Char.RANGE[1]) {
+    if (value >= Char.RANGE[1]) {
       return new Char(Char.RANGE[1]);
     } else {
       return new Char(value);
@@ -83,9 +82,9 @@ export class UnsignedShortInt extends AbstractIntType implements INumberType {
 
   public pow(exponent: INumberType | number): Char {
     const value = this._value ** exponent.valueOf();
-    if (value < Char.RANGE[0]) {
+    if (value <= Char.RANGE[0]) {
       return new Char(Char.RANGE[0]);
-    } else if (value > Char.RANGE[1]) {
+    } else if (value >= Char.RANGE[1]) {
       return new Char(Char.RANGE[1]);
     } else {
       return new Char(value);
@@ -94,7 +93,7 @@ export class UnsignedShortInt extends AbstractIntType implements INumberType {
 
   public and(arg: INumberType | number) {
     const value = this._value & arg.valueOf();
-    if (value > Char.RANGE[1]) {
+    if (value >= Char.RANGE[1]) {
       return new Char(Char.RANGE[1]);
     } else {
       return new Char(value);
@@ -103,7 +102,7 @@ export class UnsignedShortInt extends AbstractIntType implements INumberType {
 
   public or(arg: INumberType | number): Char {
     const value = this._value | arg.valueOf();
-    if (value > Char.RANGE[1]) {
+    if (value >= Char.RANGE[1]) {
       return new Char(Char.RANGE[1]);
     } else {
       return new Char(value);

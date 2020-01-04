@@ -12,11 +12,10 @@ export class UnsignedInt extends AbstractIntType implements INumberType {
 
   constructor(v: number) {
     super(v);
-    const isInt = Number.isInteger(v);
-    if (v >= this._range[0] && v < this._range[1] && isInt) {
+    if (UnsignedInt.is(v)) {
       this._value = v;
     } else {
-      if (isInt) {
+      if (Number.isInteger(v)) {
         throw type_mismatch(this._typeName, this._typeName);
       } else {
         throw out_of_range(this._range, this._typeName, v);
@@ -31,7 +30,7 @@ export class UnsignedInt extends AbstractIntType implements INumberType {
   public static is(v: number) {
     return (
       v >= UnsignedInt.RANGE[0] &&
-      v < UnsignedInt.RANGE[1] &&
+      v <= UnsignedInt.RANGE[1] &&
       Number.isInteger(v)
     );
   }

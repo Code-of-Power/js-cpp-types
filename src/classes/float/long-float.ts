@@ -1,4 +1,4 @@
-import { out_of_range, type_mismatch } from '../../functions';
+import { out_of_range } from '../../functions';
 import { INumberType } from '../../interfaces';
 import { AbstractFloatType } from '../abstract/abstract-float';
 import { Float } from './float';
@@ -10,7 +10,7 @@ export class LongFloat extends AbstractFloatType {
 
   constructor(v?: number) {
     super(v);
-    if (v >= this._range[0] && v < this._range[1]) {
+    if (LongFloat.is(v)) {
       this._value = v;
     } else {
       throw out_of_range(this._range, this._typeName, v);
@@ -22,7 +22,7 @@ export class LongFloat extends AbstractFloatType {
   }
 
   public static is(v: number) {
-    return v >= LongFloat.RANGE[0] && v < LongFloat.RANGE[1];
+    return v >= LongFloat.RANGE[0] && v <= LongFloat.RANGE[1];
   }
 
   public add(term: INumberType | number): LongFloat {

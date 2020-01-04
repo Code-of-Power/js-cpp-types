@@ -11,11 +11,10 @@ export class Char extends AbstractIntType implements INumberType {
 
   constructor(v?: number) {
     super(v);
-    const isInt = Number.isInteger(v);
-    if (v >= this._range[0] && v < this._range[1] && isInt) {
+    if (Char.is(v)) {
       this._value = v;
     } else {
-      if (isInt) {
+      if (Number.isInteger(v)) {
         throw type_mismatch(this._typeName, this._typeName);
       } else {
         throw out_of_range(this._range, this._typeName, v);
@@ -28,7 +27,7 @@ export class Char extends AbstractIntType implements INumberType {
   }
 
   public static is(v: number) {
-    return v >= Char.RANGE[0] && v < Char.RANGE[1] && Number.isInteger(v);
+    return v >= Char.RANGE[0] && v <= Char.RANGE[1] && Number.isInteger(v);
   }
 
   public toShortInt(): ShortInt {
@@ -43,7 +42,7 @@ export class Char extends AbstractIntType implements INumberType {
     return new Int(this._value);
   }
 
-  public toLongInt(): UnsignedInt {
+  public toUnsignedInt(): UnsignedInt {
     return new UnsignedInt(this._value);
   }
 

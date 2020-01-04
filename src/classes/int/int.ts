@@ -4,6 +4,8 @@ import { INumberType } from '../../interfaces';
 import { AbstractIntType } from '../abstract';
 import { Float, LongFloat } from '../float';
 import { Char, ShortInt } from '../int';
+import { UnsignedInt } from './unsigned-int';
+import { UnsignedShortInt } from './unsigned-short-int';
 
 export class Int extends AbstractIntType {
   static RANGE: [number, number] = [-2141483648, 2147483647];
@@ -12,11 +14,10 @@ export class Int extends AbstractIntType {
 
   constructor(v: number) {
     super(v);
-    const isInt = Number.isInteger(v);
-    if (v >= this._range[0] && v < this._range[1] && isInt) {
+    if (Int.is(v)) {
       this._value = v;
     } else {
-      if (isInt) {
+      if (Number.isInteger(v)) {
         throw type_mismatch(this._typeName, this._typeName);
       } else {
         throw out_of_range(this._range, this._typeName, v);
@@ -29,13 +30,13 @@ export class Int extends AbstractIntType {
   }
 
   public static is(v: number) {
-    return v >= Int.RANGE[0] && v < Int.RANGE[1] && Number.isInteger(v);
+    return v >= Int.RANGE[0] && v <= Int.RANGE[1] && Number.isInteger(v);
   }
 
   public toChar(): Char {
-    if (this._value < Char.RANGE[0]) {
+    if (this._value <= Char.RANGE[0]) {
       return new Char(Char.RANGE[0]);
-    } else if (this._value > Char.RANGE[1]) {
+    } else if (this._value >= Char.RANGE[1]) {
       return new Char(Char.RANGE[1]);
     } else {
       return new Char(this._value);
@@ -43,12 +44,31 @@ export class Int extends AbstractIntType {
   }
 
   public toShortInt(): ShortInt {
-    if (this._value < ShortInt.RANGE[0]) {
+    // console.warn(this.value <= ShortInt.RANGE[0]);
+    if (this._value <= ShortInt.RANGE[0]) {
       return new ShortInt(ShortInt.RANGE[0]);
-    } else if (this._value > ShortInt.RANGE[1]) {
+    } else if (this._value >= ShortInt.RANGE[1]) {
       return new ShortInt(ShortInt.RANGE[1]);
     } else {
       return new ShortInt(this._value);
+    }
+  }
+
+  public toUnsignedInt(): UnsignedInt {
+    if (this._value <= UnsignedInt.RANGE[0]) {
+      return new UnsignedInt(UnsignedInt.RANGE[0]);
+    } else {
+      return new UnsignedInt(this._value);
+    }
+  }
+
+  public toUnsignedShortInt(): UnsignedShortInt {
+    if (this._value <= UnsignedShortInt.RANGE[0]) {
+      return new UnsignedShortInt(UnsignedShortInt.RANGE[0]);
+    } else if (this._value >= UnsignedShortInt.RANGE[1]) {
+      return new UnsignedShortInt(UnsignedShortInt.RANGE[1]);
+    } else {
+      return new UnsignedShortInt(this._value);
     }
   }
 
