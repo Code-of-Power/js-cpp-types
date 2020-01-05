@@ -1,4 +1,4 @@
-import { AbstractIntType } from '../../classes/abstract';
+import { AbstractIntType } from '../classes/abstract';
 import { Float } from '../classes/float';
 
 export interface INumberType extends Number {
@@ -14,6 +14,9 @@ export interface INumberType extends Number {
   multiply(multiplier: INumberType | number): AbstractIntType;
   devide(devider: INumberType | number): Float;
   pow(exponent: INumberType | number): AbstractIntType;
+
+  inc(): AbstractIntType;
+  dec(): AbstractIntType;
 
   or(arg: INumberType | number): AbstractIntType;
   and(arg: INumberType | number): AbstractIntType;

@@ -121,4 +121,22 @@ export class UnsignedShortInt extends AbstractIntType implements INumberType {
       return new UnsignedShortInt(value);
     }
   }
+
+  public inc() {
+    const value = this._value + 1;
+    if (value > UnsignedShortInt.RANGE[1]) {
+      return new UnsignedShortInt(UnsignedShortInt.RANGE[1]);
+    } else {
+      return new UnsignedShortInt(value);
+    }
+  }
+
+  public dec() {
+    const value = this._value - 1;
+    if (value < UnsignedShortInt.RANGE[0]) {
+      return new UnsignedShortInt(UnsignedShortInt.RANGE[0]);
+    } else {
+      return new UnsignedShortInt(value);
+    }
+  }
 }

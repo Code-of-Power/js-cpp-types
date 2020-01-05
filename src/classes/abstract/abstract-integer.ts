@@ -72,6 +72,9 @@ export abstract class AbstractIntType implements INumberType {
   public abstract or(arg: INumberType | number): AbstractIntType;
   public abstract and(arg: INumberType | number): AbstractIntType;
 
+  public abstract inc(): AbstractIntType;
+  public abstract dec(): AbstractIntType;
+
   public more(arg: INumberType | number): boolean {
     const val = arg.valueOf ? arg.valueOf() : arg;
     return this._value > val;

@@ -130,4 +130,22 @@ export class Char extends AbstractIntType implements INumberType {
       return new Char(value);
     }
   }
+
+  public inc() {
+    const value = this._value + 1;
+    if (value > Char.RANGE[1]) {
+      return new Char(Char.RANGE[1]);
+    } else {
+      return new Char(value);
+    }
+  }
+
+  public dec() {
+    const value = this._value - 1;
+    if (value < Char.RANGE[0]) {
+      return new Char(Char.RANGE[0]);
+    } else {
+      return new Char(value);
+    }
+  }
 }

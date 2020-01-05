@@ -156,4 +156,22 @@ export class Int extends AbstractIntType {
       return new Int(value);
     }
   }
+
+  public inc() {
+    const value = this._value + 1;
+    if (value > Int.RANGE[1]) {
+      return new Int(Int.RANGE[1]);
+    } else {
+      return new Int(value);
+    }
+  }
+
+  public dec() {
+    const value = this._value - 1;
+    if (value < Int.RANGE[0]) {
+      return new Int(Int.RANGE[0]);
+    } else {
+      return new Int(value);
+    }
+  }
 }

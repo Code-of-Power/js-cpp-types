@@ -99,4 +99,22 @@ export class LongFloat extends AbstractFloatType {
       return new LongFloat(value);
     }
   }
+
+  public inc() {
+    const value = this._value + 1;
+    if (value > LongFloat.RANGE[1]) {
+      return new LongFloat(LongFloat.RANGE[1]);
+    } else {
+      return new LongFloat(value);
+    }
+  }
+
+  public dec() {
+    const value = this._value - 1;
+    if (value < LongFloat.RANGE[0]) {
+      return new LongFloat(LongFloat.RANGE[0]);
+    } else {
+      return new LongFloat(value);
+    }
+  }
 }

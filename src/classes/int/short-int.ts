@@ -129,4 +129,22 @@ export class ShortInt extends AbstractIntType implements INumberType {
       return new ShortInt(value);
     }
   }
+
+  public inc() {
+    const value = this._value + 1;
+    if (value > ShortInt.RANGE[1]) {
+      return new ShortInt(ShortInt.RANGE[1]);
+    } else {
+      return new ShortInt(value);
+    }
+  }
+
+  public dec() {
+    const value = this._value - 1;
+    if (value < ShortInt.RANGE[0]) {
+      return new ShortInt(ShortInt.RANGE[0]);
+    } else {
+      return new ShortInt(value);
+    }
+  }
 }

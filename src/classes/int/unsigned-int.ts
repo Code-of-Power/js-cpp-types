@@ -153,4 +153,22 @@ export class UnsignedInt extends AbstractIntType implements INumberType {
       return new Char(value);
     }
   }
+
+  public inc() {
+    const value = this._value + 1;
+    if (value > UnsignedInt.RANGE[1]) {
+      return new UnsignedInt(UnsignedInt.RANGE[1]);
+    } else {
+      return new UnsignedInt(value);
+    }
+  }
+
+  public dec() {
+    const value = this._value - 1;
+    if (value < UnsignedInt.RANGE[0]) {
+      return new UnsignedInt(UnsignedInt.RANGE[0]);
+    } else {
+      return new UnsignedInt(value);
+    }
+  }
 }

@@ -101,4 +101,22 @@ export class Float extends AbstractFloatType {
       return new Float(value);
     }
   }
+
+  public inc() {
+    const value = this._value + 1;
+    if (value > Float.RANGE[1]) {
+      return new Float(Float.RANGE[1]);
+    } else {
+      return new Float(value);
+    }
+  }
+
+  public dec() {
+    const value = this._value - 1;
+    if (value < Float.RANGE[0]) {
+      return new Float(Float.RANGE[0]);
+    } else {
+      return new Float(value);
+    }
+  }
 }
