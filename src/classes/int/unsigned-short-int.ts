@@ -94,7 +94,7 @@ export class UnsignedShortInt extends AbstractIntType implements INumberType {
   public shiftLeft(posCount: number) {
     const value = this._value << posCount;
     if (value >= UnsignedShortInt.RANGE[1]) {
-      return new UnsignedShortInt(UnsignedShortInt.RANGE[1]);
+      return new UnsignedShortInt(value & UnsignedShortInt.RANGE[1]);
     } else {
       return new UnsignedShortInt(value);
     }

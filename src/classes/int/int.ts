@@ -44,7 +44,6 @@ export class Int extends AbstractIntType {
   }
 
   public toShortInt(): ShortInt {
-    // console.warn(this.value <= ShortInt.RANGE[0]);
     if (this._value <= ShortInt.RANGE[0]) {
       return new ShortInt(ShortInt.RANGE[0]);
     } else if (this._value >= ShortInt.RANGE[1]) {
@@ -128,11 +127,7 @@ export class Int extends AbstractIntType {
 
   public shiftLeft(posCount: number) {
     const value = this._value << posCount;
-    if (value >= Int.RANGE[1]) {
-      return new Int(Int.RANGE[1]);
-    } else {
-      return new Int(value);
-    }
+    return new Int(value & Int.RANGE[1]);
   }
 
   public shiftRight(posCount: number) {

@@ -93,6 +93,15 @@ describe('Test Char type', () => {
     expect(new Char(Char.RANGE[0]).dec().value).toBe(Char.RANGE[0]);
   });
 
+  test('Shift right', () => {
+    expect(new Char(3).shiftRight(1).value).toBe(3 >> 1);
+  });
+
+  test('Shift left', () => {
+    expect(new Char(3).shiftLeft(1).value).toBe(3 << 1);
+    expect(new Char(Char.RANGE[1]).shiftLeft(1).value).toBe(Char.RANGE[1] - 1);
+  });
+
   test('Type conversion', () => {
     const val = 122;
     const char = new Char(val);

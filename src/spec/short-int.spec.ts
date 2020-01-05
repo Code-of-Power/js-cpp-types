@@ -85,4 +85,15 @@ describe('Test ShortInt type', () => {
     expect(new ShortInt(100).dec().value).toBe(99);
     expect(new ShortInt(ShortInt.RANGE[0]).dec().value).toBe(ShortInt.RANGE[0]);
   });
+
+  test('Shift right', () => {
+    expect(new ShortInt(3).shiftRight(1).value).toBe(3 >> 1);
+  });
+
+  test('Shift left', () => {
+    expect(new ShortInt(3).shiftLeft(1).value).toBe(3 << 1);
+    expect(new ShortInt(ShortInt.RANGE[1]).shiftLeft(1).value).toBe(
+      ShortInt.RANGE[1] - 1,
+    );
+  });
 });

@@ -103,4 +103,15 @@ describe('Test UnsignedShortInt type', () => {
       UnsignedShortInt.RANGE[0],
     );
   });
+
+  test('Shift right', () => {
+    expect(new UnsignedShortInt(3).shiftRight(1).value).toBe(3 >> 1);
+  });
+
+  test('Shift left', () => {
+    expect(new UnsignedShortInt(3).shiftLeft(1).value).toBe(3 << 1);
+    expect(
+      new UnsignedShortInt(UnsignedShortInt.RANGE[1]).shiftLeft(1).value,
+    ).toBe(UnsignedShortInt.RANGE[1] - 1);
+  });
 });

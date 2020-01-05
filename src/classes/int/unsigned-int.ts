@@ -124,12 +124,21 @@ export class UnsignedInt extends AbstractIntType implements INumberType {
   }
 
   public shiftLeft(posCount: number) {
-    const value = this._value << posCount;
-    if (value >= UnsignedInt.RANGE[1]) {
-      return new UnsignedInt(UnsignedInt.RANGE[1]);
-    } else {
-      return new UnsignedInt(value);
+    let bin = this._value.toString(2);
+    if (bin.length < 32) {
+      const lostPosition = 32 - bin.length;
+      let positions = '';
+      for (let i = 0; i < lostPosition; i++) {
+        positions += '0';
+      }
+      bin = `${positions}${bin}`;
     }
+    const slice = bin.slice(posCount, bin.length);
+    let a = '';
+    for (let i = 0; i < posCount; i++) {
+      a += '0';
+    }
+    return new UnsignedInt(Number(`0b${slice}${a}`));
   }
 
   public shiftRight(posCount: number) {

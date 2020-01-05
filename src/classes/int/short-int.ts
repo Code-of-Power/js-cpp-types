@@ -102,7 +102,7 @@ export class ShortInt extends AbstractIntType implements INumberType {
   public shiftLeft(posCount: number) {
     const value = this._value << posCount;
     if (value >= ShortInt.RANGE[1]) {
-      return new ShortInt(ShortInt.RANGE[1]);
+      return new ShortInt(value & ShortInt.RANGE[1]);
     } else {
       return new ShortInt(value);
     }

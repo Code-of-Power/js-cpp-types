@@ -1,4 +1,12 @@
-import { Char, Float, Int, LongFloat, ShortInt, UnsignedInt, UnsignedShortInt } from '../';
+import {
+  Char,
+  Float,
+  Int,
+  LongFloat,
+  ShortInt,
+  UnsignedInt,
+  UnsignedShortInt,
+} from '../';
 
 describe('Test Int type', () => {
   test('Sum', () => {
@@ -95,7 +103,9 @@ describe('Test Int type', () => {
 
     // To UnsignedShortInt
     expect(intPositive.toUnsignedShortInt()).toBeInstanceOf(UnsignedShortInt);
-    expect(intNegative.toUnsignedShortInt().value).toBe(UnsignedShortInt.RANGE[0]);
+    expect(intNegative.toUnsignedShortInt().value).toBe(
+      UnsignedShortInt.RANGE[0],
+    );
 
     // To Float types
     expect(intPositive.toFloat()).toBeInstanceOf(Float);
@@ -110,5 +120,14 @@ describe('Test Int type', () => {
   test('Dec method', () => {
     expect(new Int(100).dec().value).toBe(99);
     expect(new Int(Int.RANGE[0]).dec().value).toBe(Int.RANGE[0]);
+  });
+
+  test('Shift right', () => {
+    expect(new Int(3).shiftRight(1).value).toBe(3 >> 1);
+  });
+
+  test('Shift left', () => {
+    expect(new Int(3).shiftLeft(1).value).toBe(3 << 1);
+    expect(new Int(Int.RANGE[1]).shiftLeft(1).value).toBe(Int.RANGE[1] - 1);
   });
 });

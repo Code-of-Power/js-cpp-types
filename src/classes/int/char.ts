@@ -103,7 +103,7 @@ export class Char extends AbstractIntType implements INumberType {
   public shiftLeft(posCount: number) {
     const value = this._value << posCount;
     if (value >= Char.RANGE[1]) {
-      return new Char(Char.RANGE[1]);
+      return new Char(value & Char.RANGE[1]);
     } else {
       return new Char(value);
     }

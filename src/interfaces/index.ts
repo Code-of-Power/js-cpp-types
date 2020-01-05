@@ -18,6 +18,9 @@ export interface INumberType extends Number {
   inc(): AbstractIntType;
   dec(): AbstractIntType;
 
+  shiftLeft(posCount: number): AbstractIntType;
+  shiftRight(posCount: number): AbstractIntType;
+
   or(arg: INumberType | number): AbstractIntType;
   and(arg: INumberType | number): AbstractIntType;
 
