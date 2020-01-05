@@ -101,4 +101,14 @@ describe('Test Int type', () => {
     expect(intPositive.toFloat()).toBeInstanceOf(Float);
     expect(intPositive.toLongFloat()).toBeInstanceOf(LongFloat);
   });
+
+  test('Inc method', () => {
+    expect(new Int(100).inc().value).toBe(101);
+    expect(new Int(Int.RANGE[1]).inc().value).toBe(Int.RANGE[1]);
+  });
+
+  test('Dec method', () => {
+    expect(new Int(100).dec().value).toBe(99);
+    expect(new Int(Int.RANGE[0]).dec().value).toBe(Int.RANGE[0]);
+  });
 });

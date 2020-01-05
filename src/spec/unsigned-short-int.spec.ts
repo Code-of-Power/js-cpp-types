@@ -89,4 +89,18 @@ describe('Test UnsignedShortInt type', () => {
     const result = new UnsignedShortInt(10).less(10);
     expect(result).toBe(result);
   });
+
+  test('Inc method', () => {
+    expect(new UnsignedShortInt(100).inc().value).toBe(101);
+    expect(new UnsignedShortInt(UnsignedShortInt.RANGE[1]).inc().value).toBe(
+      UnsignedShortInt.RANGE[1],
+    );
+  });
+
+  test('Dec method', () => {
+    expect(new UnsignedShortInt(100).dec().value).toBe(99);
+    expect(new UnsignedShortInt(UnsignedShortInt.RANGE[0]).dec().value).toBe(
+      UnsignedShortInt.RANGE[0],
+    );
+  });
 });

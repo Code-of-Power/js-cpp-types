@@ -83,6 +83,16 @@ describe('Test Char type', () => {
     expect(result).toBe(result);
   });
 
+  test('Inc method', () => {
+    expect(new Char(100).inc().value).toBe(101);
+    expect(new Char(Char.RANGE[1]).inc().value).toBe(Char.RANGE[1]);
+  });
+
+  test('Dec method', () => {
+    expect(new Char(100).dec().value).toBe(99);
+    expect(new Char(Char.RANGE[0]).dec().value).toBe(Char.RANGE[0]);
+  });
+
   test('Type conversion', () => {
     const val = 122;
     const char = new Char(val);

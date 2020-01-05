@@ -75,4 +75,14 @@ describe('Test ShortInt type', () => {
     const result = new ShortInt(10).less(10);
     expect(result).toBe(result);
   });
+
+  test('Inc method', () => {
+    expect(new ShortInt(100).inc().value).toBe(101);
+    expect(new ShortInt(ShortInt.RANGE[1]).inc().value).toBe(ShortInt.RANGE[1]);
+  });
+
+  test('Dec method', () => {
+    expect(new ShortInt(100).dec().value).toBe(99);
+    expect(new ShortInt(ShortInt.RANGE[0]).dec().value).toBe(ShortInt.RANGE[0]);
+  });
 });

@@ -75,4 +75,14 @@ describe('Test Float type', () => {
     const result = new Float(10).less(10);
     expect(result).toBe(result);
   });
+
+  test('Inc method', () => {
+    expect(new Float(100).inc().value).toBe(101);
+    expect(new Float(Float.RANGE[1]).inc().value).toBe(Float.RANGE[1]);
+  });
+
+  test('Dec method', () => {
+    expect(new Float(100).dec().value).toBe(99);
+    expect(new Float(Float.RANGE[0]).dec().value).toBe(Float.RANGE[0]);
+  });
 });

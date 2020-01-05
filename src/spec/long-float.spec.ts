@@ -75,4 +75,18 @@ describe('Test LongFloat type', () => {
     const result = new LongFloat(10).less(10);
     expect(result).toBe(result);
   });
+
+  test('Inc method', () => {
+    expect(new LongFloat(100).inc().value).toBe(101);
+    expect(new LongFloat(LongFloat.RANGE[1]).inc().value).toBe(
+      LongFloat.RANGE[1],
+    );
+  });
+
+  test('Dec method', () => {
+    expect(new LongFloat(100).dec().value).toBe(99);
+    expect(new LongFloat(LongFloat.RANGE[0]).dec().value).toBe(
+      LongFloat.RANGE[0],
+    );
+  });
 });

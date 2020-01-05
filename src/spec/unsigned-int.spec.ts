@@ -79,4 +79,18 @@ describe('Test UnsignedInt type', () => {
     const result = new UnsignedInt(10).less(10);
     expect(result).toBe(result);
   });
+
+  test('Inc method', () => {
+    expect(new UnsignedInt(100).inc().value).toBe(101);
+    expect(new UnsignedInt(UnsignedInt.RANGE[1]).inc().value).toBe(
+      UnsignedInt.RANGE[1],
+    );
+  });
+
+  test('Dec method', () => {
+    expect(new UnsignedInt(100).dec().value).toBe(99);
+    expect(new UnsignedInt(UnsignedInt.RANGE[0]).dec().value).toBe(
+      UnsignedInt.RANGE[0],
+    );
+  });
 });
