@@ -95,7 +95,7 @@ describe('Test Int type', () => {
 
     // To UnsignedShortInt
     expect(intPositive.toUnsignedShortInt()).toBeInstanceOf(UnsignedShortInt);
-    // expect(intNegative.toUnsignedShortInt().value).toBe(UnsignedShortInt.RANGE[0]);
+    expect(intNegative.toUnsignedShortInt().value).toBe(UnsignedShortInt.RANGE[0]);
 
     // To Float types
     expect(intPositive.toFloat()).toBeInstanceOf(Float);
