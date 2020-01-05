@@ -45,34 +45,34 @@ export class UnsignedShortInt extends AbstractIntType implements INumberType {
     }
   }
 
-  public add(term: INumberType | number): Char {
+  public add(term: INumberType | number) {
     const value = this._value + term.valueOf();
-    if (value >= Char.RANGE[1]) {
-      return new Char(Char.RANGE[1]);
-    } else if (value <= Char.RANGE[0]) {
-      return new Char(Char.RANGE[0]);
+    if (value >= UnsignedShortInt.RANGE[1]) {
+      return new UnsignedShortInt(UnsignedShortInt.RANGE[1]);
+    } else if (value <= UnsignedShortInt.RANGE[0]) {
+      return new UnsignedShortInt(UnsignedShortInt.RANGE[0]);
     } else {
-      return new Char(value);
+      return new UnsignedShortInt(value);
     }
   }
 
-  public subtract(subtrahend: INumberType | number): Char {
+  public subtract(subtrahend: INumberType | number) {
     const value = this._value - subtrahend.valueOf();
-    if (value >= Char.RANGE[1]) {
-      return new Char(Char.RANGE[1]);
-    } else if (value <= Char.RANGE[0]) {
-      return new Char(Char.RANGE[0]);
+    if (value >= UnsignedShortInt.RANGE[1]) {
+      return new UnsignedShortInt(UnsignedShortInt.RANGE[1]);
+    } else if (value <= UnsignedShortInt.RANGE[0]) {
+      return new UnsignedShortInt(UnsignedShortInt.RANGE[0]);
     } else {
-      return new Char(value);
+      return new UnsignedShortInt(value);
     }
   }
 
   public multiply(multiplier: INumberType | number) {
     const value = this._value * multiplier.valueOf();
-    if (value >= Char.RANGE[1]) {
-      return new Char(Char.RANGE[1]);
+    if (value >= UnsignedShortInt.RANGE[1]) {
+      return new UnsignedShortInt(UnsignedShortInt.RANGE[1]);
     } else {
-      return new Char(value);
+      return new UnsignedShortInt(value);
     }
   }
 
@@ -80,32 +80,45 @@ export class UnsignedShortInt extends AbstractIntType implements INumberType {
     return new Float(this.value / devider.valueOf());
   }
 
-  public pow(exponent: INumberType | number): Char {
+  public pow(exponent: INumberType | number) {
     const value = this._value ** exponent.valueOf();
-    if (value <= Char.RANGE[0]) {
-      return new Char(Char.RANGE[0]);
-    } else if (value >= Char.RANGE[1]) {
-      return new Char(Char.RANGE[1]);
+    if (value <= UnsignedShortInt.RANGE[0]) {
+      return new UnsignedShortInt(UnsignedShortInt.RANGE[0]);
+    } else if (value >= UnsignedShortInt.RANGE[1]) {
+      return new UnsignedShortInt(UnsignedShortInt.RANGE[1]);
     } else {
-      return new Char(value);
+      return new UnsignedShortInt(value);
     }
+  }
+
+  public shiftLeft(posCount: number) {
+    const value = this._value << posCount;
+    if (value >= UnsignedShortInt.RANGE[1]) {
+      return new UnsignedShortInt(UnsignedShortInt.RANGE[1]);
+    } else {
+      return new UnsignedShortInt(value);
+    }
+  }
+
+  public shiftRight(posCount: number) {
+    return new UnsignedShortInt(this._value >> posCount);
   }
 
   public and(arg: INumberType | number) {
     const value = this._value & arg.valueOf();
-    if (value >= Char.RANGE[1]) {
-      return new Char(Char.RANGE[1]);
+    if (value >= UnsignedShortInt.RANGE[1]) {
+      return new UnsignedShortInt(UnsignedShortInt.RANGE[1]);
     } else {
-      return new Char(value);
+      return new UnsignedShortInt(value);
     }
   }
 
-  public or(arg: INumberType | number): Char {
+  public or(arg: INumberType | number) {
     const value = this._value | arg.valueOf();
-    if (value >= Char.RANGE[1]) {
-      return new Char(Char.RANGE[1]);
+    if (value >= UnsignedShortInt.RANGE[1]) {
+      return new UnsignedShortInt(UnsignedShortInt.RANGE[1]);
     } else {
-      return new Char(value);
+      return new UnsignedShortInt(value);
     }
   }
 }

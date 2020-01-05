@@ -123,6 +123,19 @@ export class UnsignedInt extends AbstractIntType implements INumberType {
     }
   }
 
+  public shiftLeft(posCount: number) {
+    const value = this._value << posCount;
+    if (value >= UnsignedInt.RANGE[1]) {
+      return new UnsignedInt(UnsignedInt.RANGE[1]);
+    } else {
+      return new UnsignedInt(value);
+    }
+  }
+
+  public shiftRight(posCount: number) {
+    return new UnsignedInt(this._value >> posCount);
+  }
+
   public and(arg: INumberType | number): UnsignedInt {
     const value = this._value & arg.valueOf();
     if (value > UnsignedInt.RANGE[1]) {

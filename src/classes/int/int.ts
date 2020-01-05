@@ -126,6 +126,19 @@ export class Int extends AbstractIntType {
     }
   }
 
+  public shiftLeft(posCount: number) {
+    const value = this._value << posCount;
+    if (value >= Int.RANGE[1]) {
+      return new Int(Int.RANGE[1]);
+    } else {
+      return new Int(value);
+    }
+  }
+
+  public shiftRight(posCount: number) {
+    return new Int(this._value >> posCount);
+  }
+
   public and(arg: INumberType | number): Int {
     const value = this._value & arg.valueOf();
     if (value > Int.RANGE[1]) {

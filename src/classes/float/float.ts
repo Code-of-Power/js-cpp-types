@@ -71,6 +71,19 @@ export class Float extends AbstractFloatType {
     }
   }
 
+  public shiftLeft(posCount: number) {
+    const value = this._value << posCount;
+    if (value >= Float.RANGE[1]) {
+      return new Float(Float.RANGE[1]);
+    } else {
+      return new Float(value);
+    }
+  }
+
+  public shiftRight(posCount: number) {
+    return new Float(this._value >> posCount);
+  }
+
   public and(arg: INumberType | number): Float {
     const value = this._value & arg.valueOf();
     if (value > Float.RANGE[1]) {

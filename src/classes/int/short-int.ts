@@ -99,6 +99,19 @@ export class ShortInt extends AbstractIntType implements INumberType {
     }
   }
 
+  public shiftLeft(posCount: number) {
+    const value = this._value << posCount;
+    if (value >= ShortInt.RANGE[1]) {
+      return new ShortInt(ShortInt.RANGE[1]);
+    } else {
+      return new ShortInt(value);
+    }
+  }
+
+  public shiftRight(posCount: number) {
+    return new ShortInt(this._value >> posCount);
+  }
+
   public and(arg: INumberType | number) {
     const value = this._value & arg.valueOf();
     if (value > ShortInt.RANGE[1]) {

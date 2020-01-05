@@ -69,6 +69,19 @@ export class LongFloat extends AbstractFloatType {
     }
   }
 
+  public shiftLeft(posCount: number) {
+    const value = this._value << posCount;
+    if (value >= LongFloat.RANGE[1]) {
+      return new LongFloat(LongFloat.RANGE[1]);
+    } else {
+      return new LongFloat(value);
+    }
+  }
+
+  public shiftRight(posCount: number) {
+    return new LongFloat(this._value >> posCount);
+  }
+
   public and(arg: INumberType | number): LongFloat {
     const value = this._value & arg.valueOf();
     if (value > LongFloat.RANGE[1]) {

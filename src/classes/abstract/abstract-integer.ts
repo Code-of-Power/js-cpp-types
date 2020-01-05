@@ -66,6 +66,9 @@ export abstract class AbstractIntType implements INumberType {
   public abstract devide(devider: INumberType | number): Float;
   public abstract pow(exponent: INumberType | number): AbstractIntType;
 
+  public abstract shiftRight(posCount: number): AbstractIntType;
+  public abstract shiftLeft(posCount: number): AbstractIntType;
+
   public abstract or(arg: INumberType | number): AbstractIntType;
   public abstract and(arg: INumberType | number): AbstractIntType;
 
