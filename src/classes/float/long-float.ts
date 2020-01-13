@@ -24,9 +24,7 @@ export class LongFloat extends AbstractFloatType {
   public static is(v: number) {
     return v >= LongFloat.RANGE[0] && v <= LongFloat.RANGE[1];
   }
-
-  public add(term: INumberType | number): LongFloat {
-    const value = this._value + term.valueOf();
+  public static createInst(value: number) {
     if (value > LongFloat.RANGE[1]) {
       return new LongFloat(LongFloat.RANGE[1]);
     } else if (value < LongFloat.RANGE[0]) {
@@ -34,26 +32,20 @@ export class LongFloat extends AbstractFloatType {
     } else {
       return new LongFloat(value);
     }
+  }
+
+  // ---Mathematics---
+
+  public add(term: INumberType | number): LongFloat {
+    return LongFloat.createInst(this._value + term.valueOf());
   }
 
   public subtract(subtrahend: INumberType | number): LongFloat {
-    const value = this._value - subtrahend.valueOf();
-    if (value > LongFloat.RANGE[1]) {
-      return new LongFloat(LongFloat.RANGE[1]);
-    } else if (value < LongFloat.RANGE[0]) {
-      return new LongFloat(LongFloat.RANGE[0]);
-    } else {
-      return new LongFloat(value);
-    }
+    return LongFloat.createInst(this._value - subtrahend.valueOf());
   }
 
   public multiply(multiplier: INumberType | number): LongFloat {
-    const value = this._value * multiplier.valueOf();
-    if (value > LongFloat.RANGE[1]) {
-      return new LongFloat(LongFloat.RANGE[1]);
-    } else {
-      return new LongFloat(value);
-    }
+    return LongFloat.createInst(this._value * multiplier.valueOf());
   }
 
   public devide(devider: INumberType | number) {
@@ -61,44 +53,14 @@ export class LongFloat extends AbstractFloatType {
   }
 
   public pow(exponent: INumberType | number): LongFloat {
-    const value = this._value ** exponent.valueOf();
-    if (value > LongFloat.RANGE[1]) {
-      return new LongFloat(LongFloat.RANGE[1]);
-    } else {
-      return new LongFloat(value);
-    }
+    return LongFloat.createInst(this._value ** exponent.valueOf());
   }
 
-  public shiftLeft(posCount: number) {
-    const value = this._value << posCount;
-    if (value >= LongFloat.RANGE[1]) {
-      return new LongFloat(LongFloat.RANGE[1]);
-    } else {
-      return new LongFloat(value);
-    }
+  public mod(devider: INumberType | number) {
+    return LongFloat.createInst(this._value % devider.valueOf());
   }
 
-  public shiftRight(posCount: number) {
-    return new LongFloat(this._value >> posCount);
-  }
-
-  public and(arg: INumberType | number): LongFloat {
-    const value = this._value & arg.valueOf();
-    if (value > LongFloat.RANGE[1]) {
-      return new LongFloat(LongFloat.RANGE[1]);
-    } else {
-      return new LongFloat(value);
-    }
-  }
-
-  public or(arg: INumberType | number): LongFloat {
-    const value = this._value | arg.valueOf();
-    if (value > LongFloat.RANGE[1]) {
-      return new LongFloat(LongFloat.RANGE[1]);
-    } else {
-      return new LongFloat(value);
-    }
-  }
+  // ---Increments/Dicrements---
 
   public inc() {
     const value = this._value + 1;
@@ -116,5 +78,63 @@ export class LongFloat extends AbstractFloatType {
     } else {
       return new LongFloat(value);
     }
+  }
+
+  // ---Shifts---
+
+  public shiftLeft(posCount: number) {
+    return LongFloat.createInst(this._value << posCount);
+  }
+
+  public shiftRight(posCount: number) {
+    return new LongFloat(this._value >> posCount);
+  }
+
+  // ---Binary---
+
+  public binAnd(arg: INumberType | number): LongFloat {
+    const value = this._value & arg.valueOf();
+    if (value > LongFloat.RANGE[1]) {
+      return new LongFloat(LongFloat.RANGE[1]);
+    } else {
+      return new LongFloat(value);
+    }
+  }
+
+  public binOr(arg: INumberType | number): LongFloat {
+    const value = this._value | arg.valueOf();
+    if (value > LongFloat.RANGE[1]) {
+      return new LongFloat(LongFloat.RANGE[1]);
+    } else {
+      return new LongFloat(value);
+    }
+  }
+
+  public binNot() {
+    return LongFloat.createInst(~this.value);
+  }
+
+  public xor(arg: INumberType | number) {
+    return LongFloat.createInst(this._value ^ arg.valueOf());
+  }
+
+  // ---Equality---
+
+  public tEqual(arg: INumberType | number) {
+    return this._value === arg.valueOf() && arg instanceof LongFloat;
+  }
+
+  public tNotEqual(arg: INumberType | number) {
+    return this._value === arg.valueOf() && !(arg instanceof LongFloat);
+  }
+
+  // ---Logic---
+
+  public or(arg: INumberType | number) {
+    return LongFloat.createInst(this._value || arg.valueOf());
+  }
+
+  public and(arg: INumberType | number) {
+    return LongFloat.createInst(this._value && arg.valueOf());
   }
 }
