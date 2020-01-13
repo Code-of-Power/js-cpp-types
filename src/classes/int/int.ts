@@ -29,18 +29,22 @@ export class Int extends AbstractIntType {
     return this._typeName;
   }
 
+  public static createInst(value: number) {
+    if (value > Int.RANGE[1]) {
+      return new Int(Int.RANGE[1]);
+    } else if (value < Int.RANGE[0]) {
+      return new Int(Int.RANGE[0]);
+    } else {
+      return new Int(value);
+    }
+  }
+
   public static is(v: number) {
     return v >= Int.RANGE[0] && v <= Int.RANGE[1] && Number.isInteger(v);
   }
 
   public toChar(): Char {
-    if (this._value <= Char.RANGE[0]) {
-      return new Char(Char.RANGE[0]);
-    } else if (this._value >= Char.RANGE[1]) {
-      return new Char(Char.RANGE[1]);
-    } else {
-      return new Char(this._value);
-    }
+    return Char.createInst(this._value);
   }
 
   public toShortInt(): ShortInt {
@@ -79,35 +83,18 @@ export class Int extends AbstractIntType {
     return new LongFloat(this._value);
   }
 
+  // ---Mathematics---
+
   public add(term: INumberType | number): Int {
-    const value = this._value + term.valueOf();
-    if (value > Int.RANGE[1]) {
-      return new Int(Int.RANGE[1]);
-    } else if (value < Int.RANGE[0]) {
-      return new Int(Int.RANGE[0]);
-    } else {
-      return new Int(value);
-    }
+    return Int.createInst(this._value + term.valueOf());
   }
 
   public subtract(subtrahend: INumberType | number): Int {
-    const value = this._value - subtrahend.valueOf();
-    if (value > Int.RANGE[1]) {
-      return new Int(Int.RANGE[1]);
-    } else if (value < Int.RANGE[0]) {
-      return new Int(Int.RANGE[0]);
-    } else {
-      return new Int(value);
-    }
+    return Int.createInst(this._value - subtrahend.valueOf());
   }
 
   public multiply(multiplier: INumberType | number): Int {
-    const value = this._value * multiplier.valueOf();
-    if (value > Int.RANGE[1]) {
-      return new Int(Int.RANGE[1]);
-    } else {
-      return new Int(value);
-    }
+    return Int.createInst(this._value * multiplier.valueOf());
   }
 
   public devide(devider: INumberType | number) {
@@ -115,15 +102,24 @@ export class Int extends AbstractIntType {
   }
 
   public pow(exponent: INumberType | number): Int {
-    const value = this._value ** exponent.valueOf();
-    if (value < Int.RANGE[0]) {
-      return new Int(Int.RANGE[0]);
-    } else if (value > Int.RANGE[1]) {
-      return new Int(Int.RANGE[1]);
-    } else {
-      return new Int(value);
-    }
+    return Int.createInst(this._value ** exponent.valueOf());
   }
+
+  public mod(devider: INumberType | number): Int {
+    return Int.createInst(this._value % devider.valueOf());
+  }
+
+  // ---Increments/Dicrements---
+
+  public inc() {
+    return Int.createInst(this._value + 1);
+  }
+
+  public dec() {
+    return Int.createInst(this._value - 1);
+  }
+
+  // ---Shifts---
 
   public shiftLeft(posCount: number) {
     const value = this._value << posCount;
@@ -134,39 +130,45 @@ export class Int extends AbstractIntType {
     return new Int(this._value >> posCount);
   }
 
-  public and(arg: INumberType | number): Int {
-    const value = this._value & arg.valueOf();
-    if (value > Int.RANGE[1]) {
-      return new Int(Int.RANGE[1]);
-    } else {
-      return new Int(value);
-    }
+  // ---Binary---
+
+  public binAnd(arg: INumberType | number): Int {
+    return Int.createInst(this._value & arg.valueOf());
   }
 
-  public or(arg: INumberType | number): Int {
-    const value = this._value | arg.valueOf();
-    if (value > Int.RANGE[1]) {
-      return new Int(Int.RANGE[1]);
-    } else {
-      return new Int(value);
-    }
+  public binOr(arg: INumberType | number): Int {
+    return Int.createInst(this._value | arg.valueOf());
   }
 
-  public inc() {
-    const value = this._value + 1;
-    if (value > Int.RANGE[1]) {
-      return new Int(Int.RANGE[1]);
-    } else {
-      return new Int(value);
-    }
+  public binNot(): Int {
+    return Int.createInst(~this._value);
   }
 
-  public dec() {
-    const value = this._value - 1;
-    if (value < Int.RANGE[0]) {
-      return new Int(Int.RANGE[0]);
-    } else {
-      return new Int(value);
-    }
+  public xor(arg: INumberType | number) {
+    return Int.createInst(this._value ^ arg.valueOf());
+  }
+
+  // ---Logic---
+
+  public or(arg: INumberType | number) {
+    return Int.createInst(this._value || arg.valueOf());
+  }
+
+  public and(arg: INumberType | number) {
+    return Int.createInst(this._value && arg.valueOf());
+  }
+
+  // ---Equality---
+
+  public equal(arg: INumberType | number) {
+    return this._value === arg.valueOf();
+  }
+
+  public tEqual(arg: INumberType | number) {
+    return this._value === arg.valueOf() && arg instanceof Int;
+  }
+
+  public tNotEqual(arg: INumberType | number) {
+    return this._value === arg.valueOf() && !(arg instanceof Int);
   }
 }

@@ -35,18 +35,7 @@ export class UnsignedShortInt extends AbstractIntType implements INumberType {
     );
   }
 
-  public toChar(): Char {
-    if (this._value <= Char.RANGE[0]) {
-      return new Char(Char.RANGE[0]);
-    } else if (this._value >= Char.RANGE[1]) {
-      return new Char(Char.RANGE[0]);
-    } else {
-      return new Char(this._value);
-    }
-  }
-
-  public add(term: INumberType | number) {
-    const value = this._value + term.valueOf();
+  public static createInst(value: number) {
     if (value >= UnsignedShortInt.RANGE[1]) {
       return new UnsignedShortInt(UnsignedShortInt.RANGE[1]);
     } else if (value <= UnsignedShortInt.RANGE[0]) {
@@ -54,26 +43,24 @@ export class UnsignedShortInt extends AbstractIntType implements INumberType {
     } else {
       return new UnsignedShortInt(value);
     }
+  }
+
+  public toChar(): Char {
+    return Char.createInst(this._value);
+  }
+
+  // ---Mathematics---
+
+  public add(term: INumberType | number) {
+    return UnsignedShortInt.createInst(this._value + term.valueOf());
   }
 
   public subtract(subtrahend: INumberType | number) {
-    const value = this._value - subtrahend.valueOf();
-    if (value >= UnsignedShortInt.RANGE[1]) {
-      return new UnsignedShortInt(UnsignedShortInt.RANGE[1]);
-    } else if (value <= UnsignedShortInt.RANGE[0]) {
-      return new UnsignedShortInt(UnsignedShortInt.RANGE[0]);
-    } else {
-      return new UnsignedShortInt(value);
-    }
+    return UnsignedShortInt.createInst(this._value - subtrahend.valueOf());
   }
 
   public multiply(multiplier: INumberType | number) {
-    const value = this._value * multiplier.valueOf();
-    if (value >= UnsignedShortInt.RANGE[1]) {
-      return new UnsignedShortInt(UnsignedShortInt.RANGE[1]);
-    } else {
-      return new UnsignedShortInt(value);
-    }
+    return UnsignedShortInt.createInst(this._value * multiplier.valueOf());
   }
 
   public devide(devider: INumberType | number) {
@@ -81,15 +68,24 @@ export class UnsignedShortInt extends AbstractIntType implements INumberType {
   }
 
   public pow(exponent: INumberType | number) {
-    const value = this._value ** exponent.valueOf();
-    if (value <= UnsignedShortInt.RANGE[0]) {
-      return new UnsignedShortInt(UnsignedShortInt.RANGE[0]);
-    } else if (value >= UnsignedShortInt.RANGE[1]) {
-      return new UnsignedShortInt(UnsignedShortInt.RANGE[1]);
-    } else {
-      return new UnsignedShortInt(value);
-    }
+    return UnsignedShortInt.createInst(this._value ** exponent.valueOf());
   }
+
+  public mod(devider: INumberType | number) {
+    return UnsignedShortInt.createInst(this._value % devider.valueOf());
+  }
+
+  // ---Increments/Dicrements---
+
+  public inc() {
+    return UnsignedShortInt.createInst(this._value + 1);
+  }
+
+  public dec() {
+    return UnsignedShortInt.createInst(this._value - 1);
+  }
+
+  // ---Shifts---
 
   public shiftLeft(posCount: number) {
     const value = this._value << posCount;
@@ -104,7 +100,9 @@ export class UnsignedShortInt extends AbstractIntType implements INumberType {
     return new UnsignedShortInt(this._value >> posCount);
   }
 
-  public and(arg: INumberType | number) {
+  // ---Binary---
+
+  public binAnd(arg: INumberType | number) {
     const value = this._value & arg.valueOf();
     if (value >= UnsignedShortInt.RANGE[1]) {
       return new UnsignedShortInt(UnsignedShortInt.RANGE[1]);
@@ -113,7 +111,7 @@ export class UnsignedShortInt extends AbstractIntType implements INumberType {
     }
   }
 
-  public or(arg: INumberType | number) {
+  public binOr(arg: INumberType | number) {
     const value = this._value | arg.valueOf();
     if (value >= UnsignedShortInt.RANGE[1]) {
       return new UnsignedShortInt(UnsignedShortInt.RANGE[1]);
@@ -122,21 +120,31 @@ export class UnsignedShortInt extends AbstractIntType implements INumberType {
     }
   }
 
-  public inc() {
-    const value = this._value + 1;
-    if (value > UnsignedShortInt.RANGE[1]) {
-      return new UnsignedShortInt(UnsignedShortInt.RANGE[1]);
-    } else {
-      return new UnsignedShortInt(value);
-    }
+  public binNot() {
+    return UnsignedShortInt.createInst(~this._value);
   }
 
-  public dec() {
-    const value = this._value - 1;
-    if (value < UnsignedShortInt.RANGE[0]) {
-      return new UnsignedShortInt(UnsignedShortInt.RANGE[0]);
-    } else {
-      return new UnsignedShortInt(value);
-    }
+  public xor(arg: INumberType | number) {
+    return UnsignedShortInt.createInst(this._value ^ arg.valueOf());
+  }
+
+  // ---Logic---
+
+  public or(arg: INumberType | number) {
+    return UnsignedShortInt.createInst(this._value || arg.valueOf());
+  }
+
+  public and(arg: INumberType | number) {
+    return UnsignedShortInt.createInst(this._value && arg.valueOf());
+  }
+
+  // ---Equality---
+
+  public tEqual(arg: INumberType | number) {
+    return this._value === arg.valueOf() && arg instanceof UnsignedShortInt;
+  }
+
+  public tNotEqual(arg: INumberType | number) {
+    return this._value === arg.valueOf() && !(arg instanceof UnsignedShortInt);
   }
 }

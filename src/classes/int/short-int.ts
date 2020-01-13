@@ -33,6 +33,16 @@ export class ShortInt extends AbstractIntType implements INumberType {
     );
   }
 
+  public static createInst(value: number) {
+    if (value > ShortInt.RANGE[1]) {
+      return new ShortInt(ShortInt.RANGE[1]);
+    } else if (value < ShortInt.RANGE[0]) {
+      return new ShortInt(ShortInt.RANGE[0]);
+    } else {
+      return new ShortInt(value);
+    }
+  }
+
   public toInt(): Int {
     return new Int(this._value);
   }
@@ -46,42 +56,21 @@ export class ShortInt extends AbstractIntType implements INumberType {
   }
 
   public toChar(): Char {
-    if (this._value < Char.RANGE[0]) {
-      return new Char(Char.RANGE[0]);
-    } else if (this._value > Char.RANGE[1]) {
-      return new Char(Char.RANGE[1]);
-    } else {
-      return new Char(this._value);
-    }
+    return Char.createInst(this._value);
   }
 
+  // ---Mathematics---
+
   public add(arg: INumberType | number): ShortInt {
-    const value = this._value + arg.valueOf();
-    if (value > Char.RANGE[1]) {
-      return new ShortInt(ShortInt.RANGE[1]);
-    } else {
-      return new ShortInt(value);
-    }
+    return ShortInt.createInst(this._value + arg.valueOf());
   }
 
   public subtract(subtrahend: INumberType | number) {
-    const value = this._value - subtrahend.valueOf();
-    if (value > ShortInt.RANGE[1]) {
-      return new ShortInt(ShortInt.RANGE[1]);
-    } else if (value < ShortInt.RANGE[0]) {
-      return new ShortInt(Char.RANGE[0]);
-    } else {
-      return new ShortInt(value);
-    }
+    return ShortInt.createInst(this._value - subtrahend.valueOf());
   }
 
   public multiply(multiplier: INumberType | number) {
-    const value = this._value * multiplier.valueOf();
-    if (value > ShortInt.RANGE[1]) {
-      return new ShortInt(ShortInt.RANGE[1]);
-    } else {
-      return new ShortInt(value);
-    }
+    return ShortInt.createInst(this._value * multiplier.valueOf());
   }
 
   public devide(devider: INumberType | number) {
@@ -89,15 +78,24 @@ export class ShortInt extends AbstractIntType implements INumberType {
   }
 
   public pow(exponent: INumberType | number) {
-    const value = this._value ** exponent.valueOf();
-    if (value < ShortInt.RANGE[0]) {
-      return new ShortInt(ShortInt.RANGE[0]);
-    } else if (value > Char.RANGE[1]) {
-      return new ShortInt(ShortInt.RANGE[1]);
-    } else {
-      return new ShortInt(value);
-    }
+    return ShortInt.createInst(this._value ** exponent.valueOf());
   }
+
+  public mod(devider: INumberType | number) {
+    return ShortInt.createInst(this._value % devider.valueOf());
+  }
+
+  // ---Increments/Dicrements---
+
+  public inc() {
+    return ShortInt.createInst(this._value + 1);
+  }
+
+  public dec() {
+    return ShortInt.createInst(this._value - 1);
+  }
+
+  // ---Shifts---
 
   public shiftLeft(posCount: number) {
     const value = this._value << posCount;
@@ -112,39 +110,41 @@ export class ShortInt extends AbstractIntType implements INumberType {
     return new ShortInt(this._value >> posCount);
   }
 
-  public and(arg: INumberType | number) {
-    const value = this._value & arg.valueOf();
-    if (value > ShortInt.RANGE[1]) {
-      return new ShortInt(ShortInt.RANGE[1]);
-    } else {
-      return new ShortInt(value);
-    }
+  // ---Binary---
+
+  public binAnd(arg: INumberType | number) {
+    return ShortInt.createInst(this._value & arg.valueOf());
   }
+
+  public binOr(arg: INumberType | number) {
+    return ShortInt.createInst(this._value | arg.valueOf());
+  }
+
+  public binNot() {
+    return ShortInt.createInst(~this._value);
+  }
+
+  public xor(arg: INumberType | number) {
+    return ShortInt.createInst(this._value ^ arg.valueOf());
+  }
+
+  // ---Logic---
 
   public or(arg: INumberType | number) {
-    const value = this._value | arg.valueOf();
-    if (value > ShortInt.RANGE[1]) {
-      return new ShortInt(Char.RANGE[1]);
-    } else {
-      return new ShortInt(value);
-    }
+    return ShortInt.createInst(this._value || arg.valueOf());
   }
 
-  public inc() {
-    const value = this._value + 1;
-    if (value > ShortInt.RANGE[1]) {
-      return new ShortInt(ShortInt.RANGE[1]);
-    } else {
-      return new ShortInt(value);
-    }
+  public and(arg: INumberType | number) {
+    return ShortInt.createInst(this._value && arg.valueOf());
   }
 
-  public dec() {
-    const value = this._value - 1;
-    if (value < ShortInt.RANGE[0]) {
-      return new ShortInt(ShortInt.RANGE[0]);
-    } else {
-      return new ShortInt(value);
-    }
+  // ---Equality---
+
+  public tEqual(arg: INumberType | number) {
+    return this._value === arg.valueOf() && arg instanceof ShortInt;
+  }
+
+  public tNotEqual(arg: INumberType | number) {
+    return this._value === arg.valueOf() && !(arg instanceof ShortInt);
   }
 }

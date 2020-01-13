@@ -30,6 +30,16 @@ export class Char extends AbstractIntType implements INumberType {
     return v >= Char.RANGE[0] && v <= Char.RANGE[1] && Number.isInteger(v);
   }
 
+  public static createInst(value: number) {
+    if (value > Char.RANGE[1]) {
+      return new Char(Char.RANGE[1]);
+    } else if (value < Char.RANGE[0]) {
+      return new Char(Char.RANGE[0]);
+    } else {
+      return new Char(value);
+    }
+  }
+
   public toShortInt(): ShortInt {
     return new ShortInt(this._value);
   }
@@ -54,35 +64,18 @@ export class Char extends AbstractIntType implements INumberType {
     return new LongFloat(this._value);
   }
 
+  // ---Mathematics---
+
   public add(term: INumberType | number): Char {
-    const value = this._value + term.valueOf();
-    if (value > Char.RANGE[1]) {
-      return new Char(Char.RANGE[1]);
-    } else if (value < Char.RANGE[0]) {
-      return new Char(Char.RANGE[0]);
-    } else {
-      return new Char(value);
-    }
+    return Char.createInst(this._value + term.valueOf());
   }
 
   public subtract(subtrahend: INumberType | number): Char {
-    const value = this._value - subtrahend.valueOf();
-    if (value > Char.RANGE[1]) {
-      return new Char(Char.RANGE[1]);
-    } else if (value < Char.RANGE[0]) {
-      return new Char(Char.RANGE[0]);
-    } else {
-      return new Char(value);
-    }
+    return Char.createInst(this._value - subtrahend.valueOf());
   }
 
   public multiply(multiplier: INumberType | number) {
-    const value = this._value * multiplier.valueOf();
-    if (value > Char.RANGE[1]) {
-      return new Char(Char.RANGE[1]);
-    } else {
-      return new Char(value);
-    }
+    return Char.createInst(this._value * multiplier.valueOf());
   }
 
   public devide(devider: INumberType | number) {
@@ -90,15 +83,24 @@ export class Char extends AbstractIntType implements INumberType {
   }
 
   public pow(exponent: INumberType | number): Char {
-    const value = this._value ** exponent.valueOf();
-    if (value < Char.RANGE[0]) {
-      return new Char(Char.RANGE[0]);
-    } else if (value > Char.RANGE[1]) {
-      return new Char(Char.RANGE[1]);
-    } else {
-      return new Char(value);
-    }
+    return Char.createInst(this._value ** exponent.valueOf());
   }
+
+  public mod(devider: INumberType | number) {
+    return Char.createInst(this._value % devider.valueOf());
+  }
+
+  // ---Increments/Dicrements---
+
+  public inc() {
+    return Char.createInst(this._value + 1);
+  }
+
+  public dec() {
+    return Char.createInst(this._value - 1);
+  }
+
+  // ---Shifts---
 
   public shiftLeft(posCount: number) {
     const value = this._value << posCount;
@@ -113,39 +115,41 @@ export class Char extends AbstractIntType implements INumberType {
     return new Char(this._value >> posCount);
   }
 
+  // ---Binary---
+
+  public binAnd(arg: INumberType | number) {
+    return Char.createInst(this._value & arg.valueOf());
+  }
+
+  public binOr(arg: INumberType | number): Char {
+    return Char.createInst(this._value | arg.valueOf());
+  }
+
+  public binNot() {
+    return Char.createInst(~this._value);
+  }
+
+  public xor(arg: INumberType | number) {
+    return Char.createInst(this._value ^ arg.valueOf());
+  }
+
+  // ---Equality---
+
+  public tEqual(arg: INumberType | number) {
+    return this._value === arg.valueOf() && arg instanceof Char;
+  }
+
+  public tNotEqual(arg: INumberType | number) {
+    return this._value === arg.valueOf() && !(arg instanceof Char);
+  }
+
+  // ---Logic---
+
+  public or(arg: INumberType | number) {
+    return Char.createInst(this._value || arg.valueOf());
+  }
+
   public and(arg: INumberType | number) {
-    const value = this._value & arg.valueOf();
-    if (value > Char.RANGE[1]) {
-      return new Char(Char.RANGE[1]);
-    } else {
-      return new Char(value);
-    }
-  }
-
-  public or(arg: INumberType | number): Char {
-    const value = this._value | arg.valueOf();
-    if (value > Char.RANGE[1]) {
-      return new Char(Char.RANGE[1]);
-    } else {
-      return new Char(value);
-    }
-  }
-
-  public inc() {
-    const value = this._value + 1;
-    if (value > Char.RANGE[1]) {
-      return new Char(Char.RANGE[1]);
-    } else {
-      return new Char(value);
-    }
-  }
-
-  public dec() {
-    const value = this._value - 1;
-    if (value < Char.RANGE[0]) {
-      return new Char(Char.RANGE[0]);
-    } else {
-      return new Char(value);
-    }
+    return Char.createInst(this._value && arg.valueOf());
   }
 }
