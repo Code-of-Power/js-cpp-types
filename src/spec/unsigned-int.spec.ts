@@ -49,18 +49,18 @@ describe('Test UnsignedInt type', () => {
   });
 
   test('Or method', () => {
-    const unsigned_int = new UnsignedInt(10).or(8);
+    const unsigned_int = new UnsignedInt(10).binOr(8);
     const or_res = 10 | 8;
     expect(unsigned_int.value).toBe(or_res);
   });
 
-  test('And method', () => {
-    const unsigned_int = new UnsignedInt(10).and(8);
+  test('Binary And method', () => {
+    const unsigned_int = new UnsignedInt(10).binAnd(8);
     const and_res = 10 & 8;
     expect(unsigned_int.value).toBe(and_res);
   });
 
-  test('More method', () => {
+  test('Binary More method', () => {
     const result = new UnsignedInt(10).more(15);
     expect(result).toBe(false);
   });

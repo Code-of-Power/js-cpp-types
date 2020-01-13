@@ -44,14 +44,14 @@ describe('Test Float type', () => {
     expect(float.value).toBeCloseTo(19.36);
   });
 
-  test('Or method', () => {
-    const float = new Float(10.1).or(8.2);
+  test('Binary Or method', () => {
+    const float = new Float(10.1).binOr(8.2);
     const or_res = 10.1 | 8.2;
     expect(float.value).toBeCloseTo(or_res);
   });
 
-  test('And method', () => {
-    const float = new Float(10.1).and(8.2);
+  test('Binary And method', () => {
+    const float = new Float(10.1).binAnd(8.2);
     const and_res = 10.1 & 8.2;
     expect(float.value).toBeCloseTo(and_res);
   });

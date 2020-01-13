@@ -44,14 +44,14 @@ describe('Test ShortInt type', () => {
     expect(short_int.value).toBe(16);
   });
 
-  test('Or method', () => {
-    const short_int = new ShortInt(10).or(8);
+  test('Binary Or method', () => {
+    const short_int = new ShortInt(10).binOr(8);
     const or_res = 10 | 8;
     expect(short_int.value).toBe(or_res);
   });
 
-  test('And method', () => {
-    const short_int = new ShortInt(10).and(8);
+  test('Binary And method', () => {
+    const short_int = new ShortInt(10).binAnd(8);
     const and_res = 10 & 8;
     expect(short_int.value).toBe(and_res);
   });
