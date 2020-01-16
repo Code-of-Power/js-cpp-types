@@ -2,7 +2,7 @@ import { AbstractIntType } from '../classes/abstract';
 import { Float } from '../classes/float';
 
 export interface INumberType extends Number {
-  _typeName: string;
+  typeName: string;
   value: number;
   range: [number, number];
 

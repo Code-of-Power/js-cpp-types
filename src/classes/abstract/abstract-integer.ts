@@ -3,8 +3,8 @@ import { INumberType } from '../../interfaces';
 import { Float } from '../float';
 
 export abstract class AbstractIntType implements INumberType {
-  protected abstract _range: [number, number];
-  abstract _typeName: string;
+  public abstract range: [number, number];
+  public abstract typeName: string;
   public _value = 0;
 
   constructor(v?: number) {
@@ -27,33 +27,25 @@ export abstract class AbstractIntType implements INumberType {
     return this._value.toPrecision(precision);
   }
 
-  get typeName() {
-    return this._typeName;
-  }
-
   get value() {
     return this._value;
   }
 
   set value(v: number) {
     const isInt = Number.isInteger(v);
-    if (v >= this._range[0] && v < this._range[1] && isInt) {
+    if (v >= this.range[0] && v < this.range[1] && isInt) {
       this._value = v;
     } else {
       if (isInt) {
-        throw type_mismatch(this._typeName, 'Float');
+        throw type_mismatch(this.typeName, 'Float');
       } else {
-        throw out_of_range(this._range, this._typeName, v);
+        throw out_of_range(this.range, this.typeName, v);
       }
     }
   }
 
   public valueOf(): number {
     return this._value;
-  }
-
-  get range() {
-    return [...this.range];
   }
 
   public toString(): string {
@@ -90,39 +82,62 @@ export abstract class AbstractIntType implements INumberType {
 
   public abstract or(arg: INumberType | number): AbstractIntType;
   public abstract and(arg: INumberType | number): AbstractIntType;
-
+  /**
+   * Return negation of number. Return true if value is zero. (!)
+   */
   public not(): boolean {
     return !this._value;
   }
 
   // ---Equality---
-
-  public equal(arg: INumberType | number): boolean {
-    return arg.valueOf() === this._value;
+  /**
+   * Return true if values is equal (==)
+   * @param arg number for comparison
+   */
+  public equal(arg: INumberType | number | string): boolean {
+    // tslint:disable-next-line: triple-equals
+    return arg.valueOf() == this._value;
   }
-
-  public notEqual(arg: INumberType | number): boolean {
-    return arg.valueOf() !== this._value;
+  /**
+   * Return true if values is not equal (!=)
+   * @param arg number for comparison
+   */
+  public notEqual(arg: INumberType | number | string): boolean {
+    // tslint:disable-next-line: triple-equals
+    return arg.valueOf() != this._value;
   }
 
   public abstract tEqual(arg: INumberType | number): boolean;
   public abstract tNotEqual(arg: INumberType | number): boolean;
 
+  /**
+   * Return true if argument more than current number (>)
+   * @param arg number for comparison
+   */
   public more(arg: INumberType | number): boolean {
     const val = arg.valueOf ? arg.valueOf() : arg;
     return this._value > val;
   }
-
+  /**
+   * Return true if argument more or equal than current number (>=)
+   * @param arg number for comparison
+   */
   public moreOrEqual(arg: INumberType | number): boolean {
     const val = arg.valueOf ? arg.valueOf() : arg;
     return this._value >= val;
   }
-
+  /**
+   * Return false if argument less or than current number (<)
+   * @param arg number for comparison
+   */
   public less(arg: INumberType | number): boolean {
     const val = arg.valueOf ? arg.valueOf() : arg;
     return this._value < val;
   }
-
+  /**
+   * Return false if argument less or equal than current number (=<)
+   * @param arg number for comparison
+   */
   public lessOrEqual(arg: INumberType | number): boolean {
     const val = arg.valueOf ? arg.valueOf() : arg;
     return this._value <= val;

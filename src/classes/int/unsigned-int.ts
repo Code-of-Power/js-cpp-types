@@ -6,25 +6,34 @@ import { Float, LongFloat } from '../float';
 import { Char, Int, ShortInt, UnsignedShortInt } from '../int';
 
 export class UnsignedInt extends AbstractIntType implements INumberType {
+  /**
+   * Range 0 - 4294967295
+   */
   static RANGE: [number, number] = [0, 4294967295];
-  protected _range: [number, number] = UnsignedInt.RANGE;
-  public _typeName = 'UnsignedInt';
-
+  /**
+   * Emulate unsigned int C++ type. Size: 4 byte
+   */
   constructor(v: number) {
     super(v);
     if (UnsignedInt.is(v)) {
       this._value = v;
     } else {
       if (Number.isInteger(v)) {
-        throw type_mismatch(this._typeName, this._typeName);
+        throw type_mismatch(this.typeName, this.typeName);
       } else {
-        throw out_of_range(this._range, this._typeName, v);
+        throw out_of_range(this.range, this.typeName, v);
       }
     }
   }
 
   get typeName() {
-    return this._typeName;
+    return 'UnsignedInt';
+  }
+  /**
+   * Range 0 - 4294967295
+   */
+  get range(): [number, number] {
+    return [...UnsignedInt.RANGE] as [number, number];
   }
 
   public static is(v: number) {

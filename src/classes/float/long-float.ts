@@ -5,20 +5,22 @@ import { Float } from './float';
 
 export class LongFloat extends AbstractFloatType {
   static RANGE: [number, number] = [-9223372036854775808, 9223372036854775807];
-  protected _range: [number, number] = LongFloat.RANGE;
-  public _typeName = 'LongFloat';
 
   constructor(v?: number) {
     super(v);
     if (LongFloat.is(v)) {
       this._value = v;
     } else {
-      throw out_of_range(this._range, this._typeName, v);
+      throw out_of_range(this.range, this.typeName, v);
     }
   }
 
   get typeName() {
-    return this._typeName;
+    return 'LongFloat';
+  }
+
+  get range(): [number, number] {
+    return [...LongFloat.RANGE] as [number, number];
   }
 
   public static is(v: number) {

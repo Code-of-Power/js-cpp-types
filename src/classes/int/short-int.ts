@@ -6,25 +6,37 @@ import { Float, LongFloat } from '../float';
 import { Char, Int } from '../int';
 
 export class ShortInt extends AbstractIntType implements INumberType {
-  static RANGE: [number, number] = [-32768, 32767];
-  protected _range: [number, number] = ShortInt.RANGE;
-  public _typeName = 'ShortInt';
+  /**
+   * Range -32768 - 32767
+   */
+  static RANGE: [number, number] = [-32768, 0xfff];
 
+  /**
+   * Emulate short C++ type. Size: 2 byte
+   */
   constructor(v: number) {
     super(v);
     if (ShortInt.is(v)) {
       this._value = v;
     } else {
       if (Number.isInteger(v)) {
-        throw type_mismatch(this._typeName, this._typeName);
+        throw type_mismatch(this.typeName, this.typeName);
       } else {
-        throw out_of_range(ShortInt.RANGE, this._typeName, v);
+        throw out_of_range(ShortInt.RANGE, this.typeName, v);
       }
     }
   }
-
+  /**
+   * Return type name
+   */
   get typeName() {
-    return this._typeName;
+    return 'ShortInt';
+  }
+  /**
+   * Range -32768 - 32767
+   */
+  get range(): [number, number] {
+    return [...Char.RANGE] as [number, number];
   }
 
   public static is(v: number) {
@@ -42,15 +54,21 @@ export class ShortInt extends AbstractIntType implements INumberType {
       return new ShortInt(value);
     }
   }
-
+  /**
+   * Conversion to type Int
+   */
   public toInt(): Int {
     return new Int(this._value);
   }
-
+  /**
+   * Conversion to type Float
+   */
   public toFloat(): Float {
     return new Float(this._value);
   }
-
+  /**
+   * Conversion to type LongFloat
+   */
   public toLongFloat(): LongFloat {
     return new LongFloat(this._value);
   }

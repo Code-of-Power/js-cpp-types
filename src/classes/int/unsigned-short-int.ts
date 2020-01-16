@@ -6,25 +6,36 @@ import { Float } from '../float';
 import { Char } from '../int';
 
 export class UnsignedShortInt extends AbstractIntType implements INumberType {
-  static RANGE: [number, number] = [0, 65535];
-  protected _range: [number, number] = UnsignedShortInt.RANGE;
-  public _typeName = 'UnsignedShortInt';
-
+  /**
+   * Range 0 - 65535
+   */
+  static RANGE: [number, number] = [0, 0xffff];
+  /**
+   * Emulate unsigned short C++ type. Size: 2 byte
+   */
   constructor(v?: number) {
     super(v);
     if (UnsignedShortInt.is(v)) {
       this._value = v;
     } else {
       if (Number.isInteger(v)) {
-        throw type_mismatch(this._typeName, this._typeName);
+        throw type_mismatch(this.typeName, this.typeName);
       } else {
-        throw out_of_range(this._range, this._typeName, v);
+        throw out_of_range(this.range, this.typeName, v);
       }
     }
   }
-
+  /**
+   * Return type name
+   */
   get typeName() {
-    return this._typeName;
+    return 'UnsignedShortInt';
+  }
+  /**
+   * Range 0 - 65535
+   */
+  get range(): [number, number] {
+    return [...UnsignedShortInt.RANGE] as [number, number];
   }
 
   public static is(v: number) {
@@ -44,49 +55,76 @@ export class UnsignedShortInt extends AbstractIntType implements INumberType {
       return new UnsignedShortInt(value);
     }
   }
-
+  /**
+   * Conversion to type Char
+   */
   public toChar(): Char {
     return Char.createInst(this._value);
   }
 
   // ---Mathematics---
-
+  /**
+   * Sum of current number and argument (+)
+   * @param term number
+   */
   public add(term: INumberType | number) {
     return UnsignedShortInt.createInst(this._value + term.valueOf());
   }
-
+  /**
+   * Substract of current number and argument (-)
+   * @param subtrahend number
+   */
   public subtract(subtrahend: INumberType | number) {
     return UnsignedShortInt.createInst(this._value - subtrahend.valueOf());
   }
-
+  /**
+   * Product of myltiply currnet number and argument (*)
+   * @param multiplier number
+   */
   public multiply(multiplier: INumberType | number) {
     return UnsignedShortInt.createInst(this._value * multiplier.valueOf());
   }
-
+  /**
+   * Quotient of current value and argument (/)
+   * @param devider number
+   */
   public devide(devider: INumberType | number) {
     return new Float(this.value / devider.valueOf());
   }
-
+  /**
+   * Raises the number to the power of the argument (**)
+   * @param exponent number
+   */
   public pow(exponent: INumberType | number) {
     return UnsignedShortInt.createInst(this._value ** exponent.valueOf());
   }
-
+  /**
+   * Remainder of the division (%)
+   * @param devider
+   */
   public mod(devider: INumberType | number) {
     return UnsignedShortInt.createInst(this._value % devider.valueOf());
   }
 
   // ---Increments/Dicrements---
-
+  /**
+   * Add 1 to current number (++)
+   */
   public inc() {
     return UnsignedShortInt.createInst(this._value + 1);
   }
-
+  /**
+   * Take away 1 from current number (--)
+   */
   public dec() {
     return UnsignedShortInt.createInst(this._value - 1);
   }
 
   // ---Shifts---
-
+  /**
+   * Bit shift to left (<<)
+   * @param posCount number
+   */
   public shiftLeft(posCount: number) {
     const value = this._value << posCount;
     if (value >= UnsignedShortInt.RANGE[1]) {
@@ -95,13 +133,19 @@ export class UnsignedShortInt extends AbstractIntType implements INumberType {
       return new UnsignedShortInt(value);
     }
   }
-
+  /**
+   * Bit shift to right (>>)
+   * @param posCount number
+   */
   public shiftRight(posCount: number) {
     return new UnsignedShortInt(this._value >> posCount);
   }
 
   // ---Binary---
-
+  /**
+   * Result of binary AND (&)
+   * @param arg number
+   */
   public binAnd(arg: INumberType | number) {
     const value = this._value & arg.valueOf();
     if (value >= UnsignedShortInt.RANGE[1]) {
@@ -110,7 +154,10 @@ export class UnsignedShortInt extends AbstractIntType implements INumberType {
       return new UnsignedShortInt(value);
     }
   }
-
+  /**
+   * Result of binary OR (|)
+   * @param arg number
+   */
   public binOr(arg: INumberType | number) {
     const value = this._value | arg.valueOf();
     if (value >= UnsignedShortInt.RANGE[1]) {
@@ -119,11 +166,16 @@ export class UnsignedShortInt extends AbstractIntType implements INumberType {
       return new UnsignedShortInt(value);
     }
   }
-
+  /**
+   * Result of binary NOT (~)
+   */
   public binNot() {
-    return UnsignedShortInt.createInst(~this._value);
+    return UnsignedShortInt.createInst(~this._value & 0xffff);
   }
-
+  /**
+   * Result of Exclusive OR (^)
+   * @param arg number
+   */
   public xor(arg: INumberType | number) {
     return UnsignedShortInt.createInst(this._value ^ arg.valueOf());
   }
@@ -139,7 +191,10 @@ export class UnsignedShortInt extends AbstractIntType implements INumberType {
   }
 
   // ---Equality---
-
+  /**
+   * Return true if values is equal and argument type is Char
+   * @param arg number
+   */
   public tEqual(arg: INumberType | number) {
     return this._value === arg.valueOf() && arg instanceof UnsignedShortInt;
   }

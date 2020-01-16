@@ -9,24 +9,28 @@ import { UnsignedShortInt } from './unsigned-short-int';
 
 export class Int extends AbstractIntType {
   static RANGE: [number, number] = [-2141483648, 2147483647];
-  protected _range: [number, number] = Int.RANGE;
-  public _typeName = 'Int';
-
+  /**
+   * Emulate int C++ type. Size: 4 byte
+   */
   constructor(v: number) {
     super(v);
     if (Int.is(v)) {
       this._value = v;
     } else {
       if (Number.isInteger(v)) {
-        throw type_mismatch(this._typeName, this._typeName);
+        throw type_mismatch(this.typeName, this.typeName);
       } else {
-        throw out_of_range(this._range, this._typeName, v);
+        throw out_of_range(this.range, this.typeName, v);
       }
     }
   }
 
   get typeName() {
-    return this._typeName;
+    return 'Int';
+  }
+
+  get range(): [number, number] {
+    return [...Int.RANGE] as [number, number];
   }
 
   public static createInst(value: number) {
@@ -42,7 +46,9 @@ export class Int extends AbstractIntType {
   public static is(v: number) {
     return v >= Int.RANGE[0] && v <= Int.RANGE[1] && Number.isInteger(v);
   }
-
+  /**
+   * Conversion to type LongFloat. Warning: Possible loss of values!
+   */
   public toChar(): Char {
     return Char.createInst(this._value);
   }
