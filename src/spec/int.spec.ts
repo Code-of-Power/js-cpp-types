@@ -9,82 +9,126 @@ import {
 } from '../';
 
 describe('Test Int type', () => {
-  test('Sum', () => {
+  // ---Mathematics---
+
+  test('SUM (+)', () => {
     const a = (new Int(50) as unknown) as number;
     const b = (new Int(50) as unknown) as number;
     const summ = a + b;
     expect(summ).toBe(100);
-  });
 
-  test('Minimal range', () => {
-    expect(new Int(Int.RANGE[0]).value).toBe(Int.RANGE[0]);
-    expect(() => new Int(Int.RANGE[0] - 1)).toThrow();
-  });
-
-  test('Maximum range', () => {
-    expect(new Int(Int.RANGE[1]).value).toBe(Int.RANGE[1]);
-    expect(() => new Int(Int.RANGE[1] + 1)).toThrow();
-  });
-
-  test('Sum method', () => {
     const int = new Int(100).add(new Int(50));
     expect(int.value).toBe(150);
   });
 
-  test('Substract method', () => {
+  test('SUBSTRACT (-)', () => {
     const int = new Int(100).subtract(new Int(50));
     expect(int.value).toBe(50);
   });
 
-  test('Multiply method', () => {
+  test('MULTIPLY (*)', () => {
     const int = new Int(100).multiply(2);
     expect(int.value).toBe(200);
   });
 
-  test('Devide method', () => {
+  test('DEVIDE (/)', () => {
     const int = new Int(100).devide(2);
     expect(int).toBeInstanceOf(Float);
     expect(int.value).toBeCloseTo(50);
   });
 
-  test('Pow method', () => {
+  test('MOD (%)', () => {
+    const char = new Int(5).mod(2);
+    const res =
+      ((new Int(5) as unknown) as number) % ((new Int(2) as unknown) as number);
+    expect(char.value).toBe(5 % 2);
+    expect(char).toBeInstanceOf(Int);
+    expect(res).toBe(5 % 2);
+  });
+
+  test('POW (**)', () => {
     const int = new Int(4).pow(2);
     expect(int.value).toBe(16);
   });
 
-  test('Binary Or method', () => {
+  // ---Increments/Dicrements---
+
+  test('INC (++)', () => {
+    expect(new Int(100).inc().value).toBe(101);
+    expect(new Int(Int.RANGE[1]).inc().value).toBe(Int.RANGE[1]);
+  });
+
+  test('DEC (--)', () => {
+    expect(new Int(100).dec().value).toBe(99);
+    expect(new Int(Int.RANGE[0]).dec().value).toBe(Int.RANGE[0]);
+  });
+
+  // ---Shifts---
+
+  test('SHIFT (>>)', () => {
+    expect(new Int(3).shiftRight(1).value).toBe(3 >> 1);
+  });
+
+  test('SHIFT (<<)', () => {
+    expect(new Int(3).shiftLeft(1).value).toBe(3 << 1);
+    expect(new Int(Int.RANGE[1]).shiftLeft(1).value).toBe(Int.RANGE[1] - 1);
+  });
+
+  // ---Binary---
+
+  test('OR (|)', () => {
     const int = new Int(10).binOr(8);
     const or_res = 10 | 8;
     expect(int.value).toBe(or_res);
   });
 
-  test('Binary And method', () => {
+  test('AND (&)', () => {
     const int = new Int(10).binAnd(8);
     const and_res = 10 & 8;
     expect(int.value).toBe(and_res);
   });
 
-  test('More method', () => {
+  test('NOT (~)', () => expect(new Int(5).binNot().value).toBe(~5));
+  test('XOR (^)', () => expect(new Int(5).xor(1).value).toBe(5 ^ 1));
+
+  // ---Logic---
+
+  test('OR (||)', () => expect(new Int(10).or(new Int(5)).value).toBe(10));
+  test('AND (&&)', () => expect(new Int(10).and(new Int(5)).value).toBe(5));
+  test('NOT (!)', () => {
+    expect(new Int(5).not()).toBe(false);
+    expect(new Int(0).not()).toBe(true);
+  });
+
+  // ---Equality---
+
+  // tslint:disable-next-line: triple-equals
+  test('EQUAL (==)', () => expect(new Int(5).equal(5)).toBe(5 == 5));
+  test('T EQUAL (===)', () => expect(new Int(5).tEqual(new Int(5))).toBe(true));
+  test('NOT EQUAL (!=)', () => {});
+  test('T NOT EQUAL', () => {});
+
+  test('MORE (>)', () => {
     const result = new Int(10).more(15);
     expect(result).toBe(false);
   });
 
-  test('More or equal method', () => {
+  test('MORE OR EQUAL (>=)', () => {
     const result = new Int(10).moreOrEqual(10);
     expect(result).toBe(true);
   });
 
-  test('Less method', () => {
+  test('LESS (<)', () => {
     const result = new Int(10).less(5);
     expect(result).toBe(false);
   });
 
-  test('Less or equal', () => {
+  test('LESS OR EQUAL (<=)', () => {
     const result = new Int(10).less(10);
     expect(result).toBe(result);
   });
 
-  test('Type conversion', () => {
+  test('CONVERTATION', () => {
     const positiveVal = Int.RANGE[1];
     const negativeVal = Int.RANGE[0];
     const intPositive = new Int(positiveVal);
@@ -112,22 +156,15 @@ describe('Test Int type', () => {
     expect(intPositive.toLongFloat()).toBeInstanceOf(LongFloat);
   });
 
-  test('Inc method', () => {
-    expect(new Int(100).inc().value).toBe(101);
-    expect(new Int(Int.RANGE[1]).inc().value).toBe(Int.RANGE[1]);
+  // ---Ranges---
+
+  test('RANGE: MIN', () => {
+    expect(new Int(Int.RANGE[0]).value).toBe(Int.RANGE[0]);
+    expect(() => new Int(Int.RANGE[0] - 1)).toThrow();
   });
 
-  test('Dec method', () => {
-    expect(new Int(100).dec().value).toBe(99);
-    expect(new Int(Int.RANGE[0]).dec().value).toBe(Int.RANGE[0]);
-  });
-
-  test('Shift right', () => {
-    expect(new Int(3).shiftRight(1).value).toBe(3 >> 1);
-  });
-
-  test('Shift left', () => {
-    expect(new Int(3).shiftLeft(1).value).toBe(3 << 1);
-    expect(new Int(Int.RANGE[1]).shiftLeft(1).value).toBe(Int.RANGE[1] - 1);
+  test('RANGE: MAX', () => {
+    expect(new Int(Int.RANGE[1]).value).toBe(Int.RANGE[1]);
+    expect(() => new Int(Int.RANGE[1] + 1)).toThrow();
   });
 });
