@@ -1,6 +1,10 @@
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow)](https://opensource.org/licenses/MIT)
+[![Codestyle: prettier](https://img.shields.io/badge/codestyle-prettier-green)](https://github.com/prettier/prettier)
+[![coverage: 82%](https://img.shields.io/badge/coverage-82%25-green)](https://github.com/Code-of-Power/js-cpp-types#coverage)
+[![dependencies: 0](https://img.shields.io/badge/dependencies-0-brightgreen)](https://github.com/Code-of-Power/js-cpp-types#dependencies)
+[![docs: yes](https://img.shields.io/badge/docs-yes-brightgreen)](https://github.com/Code-of-Power/js-cpp-types#docs)
 
-# Emulation number types for TypeScript/JavaScript
+# Emulation C/C++ types for JavaScript
 
 ## Support next number types:
 

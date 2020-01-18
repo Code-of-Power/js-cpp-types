@@ -1,5 +1,7 @@
 # Foolder ignore
 node_modules
 dist
+docs
+coverage
 # Files ignore
 *.tgz
