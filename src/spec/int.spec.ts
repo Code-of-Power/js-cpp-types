@@ -105,8 +105,18 @@ describe('Test Int type', () => {
   // tslint:disable-next-line: triple-equals
   test('EQUAL (==)', () => expect(new Int(5).equal(5)).toBe(5 == 5));
   test('T EQUAL (===)', () => expect(new Int(5).tEqual(new Int(5))).toBe(true));
-  test('NOT EQUAL (!=)', () => {});
-  test('T NOT EQUAL', () => {});
+  test('NOT EQUAL (!=)', () => {
+    expect(new Int(5).notEqual(new Int(6))).toBe(true);
+    expect(new Int(5).notEqual(new Int(5))).toBe(false);
+    expect(new Int(5).notEqual(new UnsignedInt(6))).toBe(true);
+    expect(new Int(5).notEqual(new UnsignedInt(5))).toBe(false);
+  });
+  test('T NOT EQUAL', () => {
+    expect(new Int(5).tNotEqual(new Int(6))).toBe(true);
+    expect(new Int(5).tNotEqual(new UnsignedInt(6))).toBe(true);
+    expect(new Int(6).tNotEqual(new Int(6))).toBe(false);
+    expect(new Int(6).tNotEqual(new UnsignedInt(6))).toBe(true);
+  });
 
   test('MORE (>)', () => {
     const result = new Int(10).more(15);

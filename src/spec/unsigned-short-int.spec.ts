@@ -1,4 +1,4 @@
-import { Float, UnsignedShortInt } from '../';
+import { Char, Float, Int, ShortInt, UnsignedInt, UnsignedShortInt } from '../';
 
 describe('Test UnsignedShortInt type', () => {
   // ---Mathematics---
@@ -101,7 +101,9 @@ describe('Test UnsignedShortInt type', () => {
       10,
     ));
   test('AND (&&)', () =>
-    expect(new UnsignedShortInt(10).and(new UnsignedShortInt(5)).value).toBe(5));
+    expect(new UnsignedShortInt(10).and(new UnsignedShortInt(5)).value).toBe(
+      5,
+    ));
   test('NOT (!)', () => {
     expect(new UnsignedShortInt(5).not()).toBe(false);
     expect(new UnsignedShortInt(0).not()).toBe(true);
@@ -116,10 +118,25 @@ describe('Test UnsignedShortInt type', () => {
     expect(new UnsignedShortInt(5).tEqual(new UnsignedShortInt(5))).toBe(true));
   test('NOT EQUAL (!=)', () => {
     // tslint:disable-next-line: triple-equals
-    expect(new UnsignedShortInt(5).notEqual(6)).toBe(true);
-    expect(new UnsignedShortInt(5).notEqual(5)).toBe(false);
+    expect(new UnsignedShortInt(5).notEqual(new UnsignedShortInt(6))).toBe(
+      true,
+    );
+    expect(new UnsignedShortInt(5).notEqual(new UnsignedShortInt(5))).toBe(
+      false,
+    );
+    expect(new UnsignedShortInt(5).notEqual(new UnsignedInt(6))).toBe(true);
+    expect(new UnsignedShortInt(5).notEqual(new UnsignedInt(5))).toBe(false);
   });
-  test('T NOT EQUAL', () => {}); // TODO
+  test('T NOT EQUAL', () => {
+    expect(new UnsignedShortInt(5).tNotEqual(new UnsignedShortInt(6))).toBe(
+      true,
+    );
+    expect(new UnsignedShortInt(5).tNotEqual(new UnsignedInt(6))).toBe(true);
+    expect(new UnsignedShortInt(6).tNotEqual(new UnsignedShortInt(6))).toBe(
+      false,
+    );
+    expect(new UnsignedShortInt(6).tNotEqual(new UnsignedInt(6))).toBe(true);
+  });
 
   test('MORE (>)', () => {
     const result = new UnsignedShortInt(10).more(15);
@@ -143,7 +160,18 @@ describe('Test UnsignedShortInt type', () => {
 
   // ---Convertations---
 
-  test('CONVERTATION', () => {}); // TODO
+  test('CONVERTATION', () => {
+    const val = 122;
+    const unsigned_short_int = new UnsignedShortInt(val);
+    expect(unsigned_short_int.toChar()).toBeInstanceOf(Char);
+    expect(unsigned_short_int.toChar().value).toBe(val);
+    expect(unsigned_short_int.toInt()).toBeInstanceOf(Int);
+    expect(unsigned_short_int.toInt().value).toBe(val);
+    expect(unsigned_short_int.toShortInt()).toBeInstanceOf(ShortInt);
+    expect(unsigned_short_int.toShortInt().value).toBe(val);
+    expect(unsigned_short_int.toUnsignedInt()).toBeInstanceOf(UnsignedInt);
+    expect(unsigned_short_int.toUnsignedInt().value).toBe(val);
+  });
 
   // ---Ranges---
 

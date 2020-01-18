@@ -100,8 +100,18 @@ describe(`TEST 'Char' TYPE`, () => {
   test('EQUAL (==)', () => expect(new Char(5).equal(5)).toBe(5 == 5));
   test('T EQUAL (===)', () =>
     expect(new Char(5).tEqual(new Char(5))).toBe(true));
-  test('NOT EQUAL (!=)', () => {}); // TODO
-  test('T NOT EQUAL', () => {}); // TODO
+  test('NOT EQUAL (!=)', () => {
+    expect(new Char(5).notEqual(new Char(6))).toBe(true);
+    expect(new Char(5).notEqual(new Char(5))).toBe(false);
+    expect(new Char(5).notEqual(new UnsignedInt(6))).toBe(true);
+    expect(new Char(5).notEqual(new UnsignedInt(5))).toBe(false);
+  });
+  test('T NOT EQUAL (!==)', () => {
+    expect(new Char(5).tNotEqual(new Char(6))).toBe(true);
+    expect(new Char(5).tNotEqual(new UnsignedInt(6))).toBe(true);
+    expect(new Char(6).tNotEqual(new Char(6))).toBe(false);
+    expect(new Char(6).tNotEqual(new UnsignedInt(6))).toBe(true);
+  });
   test('LESS (<)', () => expect(new Char(10).less(5)).toBe(10 < 5));
   test('LESS OR EQUAL (<=)', () =>
     expect(new Char(10).lessOrEqual(10)).toBe(10 <= 10));

@@ -1,4 +1,4 @@
-import { Float, ShortInt } from '../';
+import { Char, Float, Int, ShortInt, UnsignedInt, UnsignedShortInt } from '../';
 
 describe('Test ShortInt type', () => {
   // ---Mathematics---
@@ -88,8 +88,18 @@ describe('Test ShortInt type', () => {
   test('EQUAL (==)', () => expect(new ShortInt(5).equal(5)).toBe(5 == 5));
   test('T EQUAL (===)', () =>
     expect(new ShortInt(5).tEqual(new ShortInt(5))).toBe(true));
-  test('NOT EQUAL (!=)', () => {}); // TODO
-  test('T NOT EQUAL', () => {}); // TODO
+  test('NOT EQUAL (!=)', () => {
+    expect(new ShortInt(5).notEqual(new ShortInt(6))).toBe(true);
+    expect(new ShortInt(5).notEqual(new ShortInt(5))).toBe(false);
+    expect(new ShortInt(5).notEqual(new UnsignedInt(6))).toBe(true);
+    expect(new ShortInt(5).notEqual(new UnsignedInt(5))).toBe(false);
+  });
+  test('T NOT EQUAL', () => {
+    expect(new ShortInt(5).tNotEqual(new ShortInt(6))).toBe(true);
+    expect(new ShortInt(5).tNotEqual(new UnsignedInt(6))).toBe(true);
+    expect(new ShortInt(6).tNotEqual(new ShortInt(6))).toBe(false);
+    expect(new ShortInt(6).tNotEqual(new UnsignedInt(6))).toBe(true);
+  });
 
   test('MORE (>)', () => {
     const result = new ShortInt(10).more(15);
@@ -113,7 +123,18 @@ describe('Test ShortInt type', () => {
 
   // ---Convertations---
 
-  test('CONVERTATION', () => {});
+  test('CONVERTATION', () => {
+    const val = 122;
+    const short_int = new ShortInt(val);
+    expect(short_int.toChar()).toBeInstanceOf(Char);
+    expect(short_int.toChar().value).toBe(val);
+    expect(short_int.toInt()).toBeInstanceOf(Int);
+    expect(short_int.toInt().value).toBe(val);
+    expect(short_int.toUnsignedShortInt()).toBeInstanceOf(UnsignedShortInt);
+    expect(short_int.toUnsignedShortInt().value).toBe(val);
+    expect(short_int.toUnsignedInt()).toBeInstanceOf(UnsignedInt);
+    expect(short_int.toUnsignedInt().value).toBe(val);
+  });
 
   // ---Ranges---
 
