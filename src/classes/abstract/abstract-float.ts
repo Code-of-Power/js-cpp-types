@@ -3,10 +3,10 @@ import { AbstractIntType } from '../abstract';
 
 export abstract class AbstractFloatType extends AbstractIntType {
   set value(v: number) {
-    if (v >= this._range[0] && v < this._range[1]) {
+    if (v >= this.range[0] && v < this.range[1]) {
       this._value = v;
     } else {
-      throw out_of_range(this._range, this._typeName, v);
+      throw out_of_range(this.range, this.typeName, v);
     }
   }
 
