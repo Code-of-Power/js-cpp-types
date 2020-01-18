@@ -95,10 +95,7 @@ export class Char extends AbstractIntType implements INumberType {
   public pow(exponent: INumberType | number): Char {
     return Char.createInst(this._value ** exponent.valueOf());
   }
-  /**
-   * Remainder of the division (%)
-   * @param devider
-   */
+
   public mod(devider: INumberType | number) {
     return Char.createInst(this._value % devider.valueOf());
   }

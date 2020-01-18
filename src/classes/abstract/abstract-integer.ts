@@ -13,19 +13,32 @@ export abstract class AbstractIntType implements INumberType {
   constructor(v?: number) {
     this._value = v;
   }
-
+  /**
+   * Returns a string containing a number represented in exponential notation.
+   * @param fractionDigits Number of digits after the decimal point. Must be in the range 0 - 20, inclusive.
+   */
   public toExponential(fractionDigits?: number): string {
     return this._value.toExponential(fractionDigits);
   }
-
+  /**
+   * Returns a string representing a number in fixed-point notation.
+   * @param fractionDigits Number of digits after the decimal point. Must be in the range 0 - 20, inclusive.
+   */
   public toFixed(fractionDigits?: number): string {
     return this._value.toFixed(fractionDigits);
   }
-
+  /**
+   * Converts a number to a string by using the current or specified locale.
+   * @param locales A locale string or array of locale strings that contain one or more language or locale tags. If you include more than one locale string, list them in descending order of priority so that the first entry is the preferred locale. If you omit this parameter, the default locale of the JavaScript runtime is used
+   * @param options An object that contains one or more properties that specify comparison options.
+   */
   public toLocaleString(locales?: string | string[], options?: any): string {
     return this._value.toLocaleString(locales, options);
   }
-
+  /**
+   * Returns a string containing a number represented either in exponential or fixed-point notation with a specified number of digits.
+   * @param precisionNumber of significant digits. Must be in the range 1 - 21, inclusive.
+   */
   public toPrecision(precision?: number) {
     return this._value.toPrecision(precision);
   }
@@ -46,11 +59,16 @@ export abstract class AbstractIntType implements INumberType {
       }
     }
   }
-
+  /**
+   * Returns the primitive value of the specified object.
+   */
   public valueOf(): number {
     return this._value;
   }
-
+  /**
+   * Returns a string representation of an object.
+   * @param radix Specifies a radix for converting numeric values to strings. This value is only used for numbers.
+   */
   public toString(radix?: number): string {
     return this._value.toString(radix);
   }
@@ -131,8 +149,15 @@ export abstract class AbstractIntType implements INumberType {
   public abstract xor(arg: INumberType | number): AbstractIntType;
 
   // ---Logic---
-
+  /**
+   * Return argument if current value to boolean is false (||)
+   * @param arg number
+   */
   public abstract or(arg: INumberType | number): AbstractIntType;
+  /**
+   * Return argument if current value to boolean is true (&&)
+   * @param arg number
+   */
   public abstract and(arg: INumberType | number): AbstractIntType;
   /**
    * Return negation of number. Return true if value is zero. (!)
@@ -159,10 +184,14 @@ export abstract class AbstractIntType implements INumberType {
     return arg.valueOf() != this._value;
   }
   /**
-   * Return true if values is equal and argument type is Char
+   * Return true if values is equal and argument type is equal current type (===)
    * @param arg number
    */
   public abstract tEqual(arg: INumberType | number): boolean;
+  /**
+   * Return true if value or types not equal (!==)
+   * @param arg number
+   */
   public abstract tNotEqual(arg: INumberType | number): boolean;
 
   /**
