@@ -162,6 +162,6 @@ export class Int extends AbstractIntType {
   }
 
   public tNotEqual(arg: INumberType | number) {
-    return this._value === arg.valueOf() && !(arg instanceof Int);
+    return this._value !== arg.valueOf() || !(arg instanceof Int);
   }
 }

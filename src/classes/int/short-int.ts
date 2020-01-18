@@ -165,6 +165,6 @@ export class ShortInt extends AbstractIntType implements INumberType {
   }
 
   public tNotEqual(arg: INumberType | number) {
-    return this._value === arg.valueOf() && !(arg instanceof ShortInt);
+    return this._value !== arg.valueOf() || !(arg instanceof ShortInt);
   }
 }
