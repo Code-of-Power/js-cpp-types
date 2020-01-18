@@ -2,7 +2,13 @@ import { out_of_range, type_mismatch } from '../../functions';
 import { INumberType } from '../../interfaces';
 import { AbstractIntType } from '../abstract';
 import { Float, LongFloat } from '../float';
-import { Int, ShortInt, UnsignedInt, UnsignedShortInt } from '../int';
+import {
+  Int,
+  ShortInt,
+  SignedChar,
+  UnsignedInt,
+  UnsignedShortInt,
+} from '../int';
 
 export class Char extends AbstractIntType implements INumberType {
   /**
@@ -50,20 +56,24 @@ export class Char extends AbstractIntType implements INumberType {
     }
   }
 
+  public toSignedChar() {
+    return SignedChar.createInst(this._value);
+  }
+
   public toShortInt(): ShortInt {
-    return new ShortInt(this._value);
+    return ShortInt.createInst(this._value);
   }
 
   public toUnsignedShortInt(): UnsignedShortInt {
-    return new UnsignedShortInt(this._value);
+    return UnsignedShortInt.createInst(this._value);
   }
 
   public toInt(): Int {
-    return new Int(this._value);
+    return Int.createInst(this._value);
   }
 
   public toUnsignedInt(): UnsignedInt {
-    return new UnsignedInt(this._value);
+    return UnsignedInt.createInst(this._value);
   }
 
   public toFloat(): Float {

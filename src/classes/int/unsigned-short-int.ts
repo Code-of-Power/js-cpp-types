@@ -2,7 +2,7 @@ import { out_of_range, type_mismatch } from '../../functions';
 import { INumberType } from '../../interfaces';
 import { AbstractIntType } from '../abstract/abstract-integer';
 import { Float, LongFloat } from '../float';
-import { Char, Int, ShortInt, UnsignedInt } from './';
+import { Char, Int, ShortInt, SignedChar, UnsignedInt } from './';
 
 export class UnsignedShortInt extends AbstractIntType implements INumberType {
   /**
@@ -53,6 +53,10 @@ export class UnsignedShortInt extends AbstractIntType implements INumberType {
     } else {
       return new UnsignedShortInt(value);
     }
+  }
+
+  public toSignedChar() {
+    return SignedChar.createInst(this._value);
   }
 
   public toUnsignedInt() {

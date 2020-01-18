@@ -2,8 +2,13 @@ import { out_of_range, type_mismatch } from '../../functions';
 import { INumberType } from '../../interfaces';
 import { AbstractIntType } from '../abstract';
 import { Float, LongFloat } from '../float';
-import { Char, ShortInt, UnsignedInt, UnsignedShortInt } from '../int';
-
+import {
+  Char,
+  ShortInt,
+  SignedChar,
+  UnsignedInt,
+  UnsignedShortInt,
+} from '../int';
 
 export class Int extends AbstractIntType {
   /**
@@ -48,6 +53,10 @@ export class Int extends AbstractIntType {
 
   public static is(v: number) {
     return v >= Int.RANGE[0] && v <= Int.RANGE[1] && Number.isInteger(v);
+  }
+
+  public toSignedChar() {
+    return SignedChar.createInst(this._value);
   }
   /**
    * Conversion to type LongFloat. Warning: Possible loss of values!

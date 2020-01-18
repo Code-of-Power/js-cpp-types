@@ -1,3 +1,5 @@
+import { Char, Int, ShortInt, UnsignedInt, UnsignedShortInt } from '../int';
+
 import { out_of_range } from '../../functions';
 import { INumberType } from '../../interfaces';
 import { AbstractFloatType } from '../abstract/abstract-float';
@@ -26,6 +28,7 @@ export class LongFloat extends AbstractFloatType {
   public static is(v: number) {
     return v >= LongFloat.RANGE[0] && v <= LongFloat.RANGE[1];
   }
+
   public static createInst(value: number) {
     if (value > LongFloat.RANGE[1]) {
       return new LongFloat(LongFloat.RANGE[1]);
@@ -34,6 +37,30 @@ export class LongFloat extends AbstractFloatType {
     } else {
       return new LongFloat(value);
     }
+  }
+
+  public toChar(): Char {
+    return new Char(this._value);
+  }
+
+  public toShortInt(): ShortInt {
+    return new ShortInt(this._value);
+  }
+
+  public toUnsignedShortInt(): UnsignedShortInt {
+    return new UnsignedShortInt(this._value);
+  }
+
+  public toInt(): Int {
+    return new Int(this._value);
+  }
+
+  public toUnsignedInt() {
+    return new UnsignedInt(this._value);
+  }
+
+  public toFloat(): Float {
+    return new Float(this._value);
   }
 
   // ---Mathematics---
