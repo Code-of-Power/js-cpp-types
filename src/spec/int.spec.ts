@@ -4,6 +4,7 @@ import {
   Int,
   LongFloat,
   ShortInt,
+  SignedChar,
   UnsignedInt,
   UnsignedShortInt,
 } from '../';
@@ -143,6 +144,9 @@ describe('Test Int type', () => {
     const negativeVal = Int.RANGE[0];
     const intPositive = new Int(positiveVal);
     const intNegative = new Int(negativeVal);
+    expect(intPositive.toSignedChar()).toBeInstanceOf(SignedChar);
+    expect(intPositive.toSignedChar().value).toBe(SignedChar.RANGE[1]);
+    expect(intNegative.toSignedChar().value).toBe(SignedChar.RANGE[0]);
     // To Char
     expect(intPositive.toChar()).toBeInstanceOf(Char);
     expect(intPositive.toChar().value).toBe(Char.RANGE[1]);

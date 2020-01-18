@@ -3,6 +3,7 @@ import {
   Float,
   Int,
   ShortInt,
+  SignedChar,
   UnsignedInt,
   UnsignedShortInt,
 } from './..';
@@ -124,6 +125,8 @@ describe(`TEST 'Char' TYPE`, () => {
   test('CONVERTATION', () => {
     const val = 122;
     const char = new Char(val);
+    expect(char.toSignedChar()).toBeInstanceOf(SignedChar);
+    expect(char.toSignedChar().value).toBe(val);
     expect(char.toInt()).toBeInstanceOf(Int);
     expect(char.toInt().value).toBe(val);
     expect(char.toShortInt()).toBeInstanceOf(ShortInt);

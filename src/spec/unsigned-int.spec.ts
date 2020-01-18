@@ -1,4 +1,11 @@
-import { Char, Float, ShortInt, UnsignedInt, UnsignedShortInt } from '../';
+import {
+  Char,
+  Float,
+  ShortInt,
+  SignedChar,
+  UnsignedInt,
+  UnsignedShortInt,
+} from '../';
 
 describe('TEST UnsignedInt TYPE', () => {
   // ---Mathematics---
@@ -133,6 +140,8 @@ describe('TEST UnsignedInt TYPE', () => {
     const unsignedInt = new UnsignedInt(val);
     expect(unsignedInt.toChar()).toBeInstanceOf(Char);
     expect(unsignedInt.toChar().value).toBe(Char.RANGE[1]);
+    expect(unsignedInt.toSignedChar()).toBeInstanceOf(SignedChar);
+    expect(unsignedInt.toSignedChar().value).toBe(SignedChar.RANGE[1]);
     expect(unsignedInt.toShortInt()).toBeInstanceOf(ShortInt);
     expect(unsignedInt.toShortInt().value).toBe(val);
     expect(unsignedInt.toUnsignedShortInt()).toBeInstanceOf(UnsignedShortInt);

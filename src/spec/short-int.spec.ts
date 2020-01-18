@@ -1,4 +1,12 @@
-import { Char, Float, Int, ShortInt, UnsignedInt, UnsignedShortInt } from '../';
+import {
+  Char,
+  Float,
+  Int,
+  ShortInt,
+  SignedChar,
+  UnsignedInt,
+  UnsignedShortInt,
+} from '../';
 
 describe('Test ShortInt type', () => {
   // ---Mathematics---
@@ -128,6 +136,8 @@ describe('Test ShortInt type', () => {
     const short_int = new ShortInt(val);
     expect(short_int.toChar()).toBeInstanceOf(Char);
     expect(short_int.toChar().value).toBe(val);
+    expect(short_int.toSignedChar()).toBeInstanceOf(SignedChar);
+    expect(short_int.toSignedChar().value).toBe(val);
     expect(short_int.toInt()).toBeInstanceOf(Int);
     expect(short_int.toInt().value).toBe(val);
     expect(short_int.toUnsignedShortInt()).toBeInstanceOf(UnsignedShortInt);
