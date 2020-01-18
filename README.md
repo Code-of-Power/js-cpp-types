@@ -9,15 +9,16 @@
 ## Support next number types:
 
 Integer types:
-* Char [ 0..255 ]
-* ShortInt [ -32768..32767 ]
-* UnsignedShortInt [ 0..65535 ]
-* Int [ -2141483648..2147483647 ]
-* UnsignedInt [ 0..4294967295 ]
+* **Char** [ 0..255 ]
+* **SignedChar** [-128 - 127]
+* **ShortInt** [ -32768..32767 ]
+* **UnsignedShortInt** [ 0..65535 ]
+* **Int** [ -2141483648..2147483647 ]
+* **UnsignedInt** [ 0..4294967295 ]
 
 Float types:
-* Float [ -2147483648..2147483647 ]
-* LongFloat [ -9223372036854775808..9223372036854775807 ]
+* **Float** [ -2147483648..2147483647 ]
+* **LongFloat** [ -9223372036854775808..9223372036854775807 ]
 
 ## Hierarchy of types
 
@@ -89,3 +90,8 @@ const summ = new Char(5)
 
 * Type overflow throw exception
 * If you was use float type for create integer type it throw exception
+
+# Wiki
+
+* [RU wiki](https://github.com/Code-of-Power/js-cpp-types/wiki/Types-RU)
+* [EN wiki](https://github.com/Code-of-Power/js-cpp-types/wiki/Types-EN)
