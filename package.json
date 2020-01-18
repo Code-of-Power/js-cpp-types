@@ -1,22 +1,29 @@
 {
-  "name": "cpp-types",
+  "name": "js-cpp-types",
   "version": "1.0.0",
-  "description": "Emulation C++ (cpp) data types in TypeScript.",
+  "description": "Emulation С/C++ data types in JavaScript/TypeScript.",
   "main": "index.js",
   "scripts": {
+    "start": "jest --watch",
     "build": "tsc",
     "test": "jest",
     "test:watch": "jest --watch"
   },
   "keywords": [
     "cpp",
+    "c++",
+    "c",
     "types",
     "int",
     "short",
     "float",
     "char"
   ],
-  "author": "only-exlight",
+  "author": {
+    "name": "only-exlight",
+    "email": "only.exlight@gmail.com",
+    "url": "http://exlight.name"
+  },
   "homepage": "https://github.com/Code-of-Power/cpp-types",
   "repository": {
     "type": "git",
@@ -40,6 +47,9 @@
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.7.3"
   },
+  "engines": {
+    "node": "8.0"
+  },
   "jest": {
     "moduleFileExtensions": [
       "js",
@@ -57,6 +67,9 @@
     },
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   },
   "husky": {
     "hooks": {

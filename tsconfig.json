@@ -2,8 +2,8 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./src",
-    "outDir": "./dist/out-tsc",
-    "sourceMap": true,
+    "outDir": "./dist",
+    "sourceMap": false,
     "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
@@ -15,5 +15,8 @@
   },
   "include": [
     "./src/**/*"
+  ],
+  "exclude": [
+    "./src/spec/**/*"
   ]
 }
