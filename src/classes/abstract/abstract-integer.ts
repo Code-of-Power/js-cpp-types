@@ -4,6 +4,9 @@ import { Float } from '../float';
 
 export abstract class AbstractIntType implements INumberType {
   public abstract range: [number, number];
+  /**
+   * Return type name
+   */
   public abstract typeName: string;
   public _value = 0;
 
@@ -48,34 +51,83 @@ export abstract class AbstractIntType implements INumberType {
     return this._value;
   }
 
-  public toString(): string {
-    return this._value.toString();
+  public toString(radix?: number): string {
+    return this._value.toString(radix);
   }
 
   // ---Mathematics---
-
+  /**
+   * Sum of current number and argument (+)
+   * @param term number
+   */
   public abstract add(term: INumberType | number): AbstractIntType;
+  /**
+   * Substract of current number and argument (-)
+   * @param subtrahend number
+   */
   public abstract subtract(subtrahend: INumberType | number): AbstractIntType;
+  /**
+   * Product of myltiply currnet number and argument (*)
+   * @param multiplier number
+   */
   public abstract multiply(multiplier: INumberType | number): AbstractIntType;
+  /**
+   * Quotient of current value and argument (/)
+   * @param devider number
+   */
   public abstract devide(devider: INumberType | number): Float;
+  /**
+   * Raises the number to the power of the argument (**)
+   * @param exponent number
+   */
   public abstract pow(exponent: INumberType | number): AbstractIntType;
+  /**
+   * Remainder of the division (%)
+   * @param devider
+   */
   public abstract mod(arg: INumberType | number): AbstractIntType;
 
   // ---Increments/Dicrements---
-
+  /**
+   * Add 1 to current number (++)
+   */
   public abstract inc(): AbstractIntType;
+  /**
+   * Take away 1 from current number (--)
+   */
   public abstract dec(): AbstractIntType;
 
   // ---Shifts---
-
+  /**
+   * Bit shift to left (<<)
+   * @param posCount number
+   */
   public abstract shiftRight(posCount: number): AbstractIntType;
+  /**
+   * Bit shift to right (>>)
+   * @param posCount number
+   */
   public abstract shiftLeft(posCount: number): AbstractIntType;
 
   // ---Binary---
-
+  /**
+   * Result of binary AND (&)
+   * @param arg number
+   */
   public abstract binOr(arg: INumberType | number): AbstractIntType;
+  /**
+   * Result of binary OR (|)
+   * @param arg number
+   */
   public abstract binAnd(arg: INumberType | number): AbstractIntType;
+  /**
+   * Result of binary NOT (~)
+   */
   public abstract binNot(): AbstractIntType;
+  /**
+   * Result of Exclusive OR (^)
+   * @param arg number
+   */
   public abstract xor(arg: INumberType | number): AbstractIntType;
 
   // ---Logic---
@@ -106,7 +158,10 @@ export abstract class AbstractIntType implements INumberType {
     // tslint:disable-next-line: triple-equals
     return arg.valueOf() != this._value;
   }
-
+  /**
+   * Return true if values is equal and argument type is Char
+   * @param arg number
+   */
   public abstract tEqual(arg: INumberType | number): boolean;
   public abstract tNotEqual(arg: INumberType | number): boolean;
 

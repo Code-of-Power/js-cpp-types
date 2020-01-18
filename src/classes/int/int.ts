@@ -1,13 +1,14 @@
 import { out_of_range, type_mismatch } from '../../functions';
-
 import { INumberType } from '../../interfaces';
 import { AbstractIntType } from '../abstract';
 import { Float, LongFloat } from '../float';
-import { Char, ShortInt } from '../int';
-import { UnsignedInt } from './unsigned-int';
-import { UnsignedShortInt } from './unsigned-short-int';
+import { Char, ShortInt, UnsignedInt, UnsignedShortInt } from '../int';
+
 
 export class Int extends AbstractIntType {
+  /**
+   * Range -2141483648 - 2147483647
+   */
   static RANGE: [number, number] = [-2141483648, 2147483647];
   /**
    * Emulate int C++ type. Size: 4 byte
@@ -28,7 +29,9 @@ export class Int extends AbstractIntType {
   get typeName() {
     return 'Int';
   }
-
+  /**
+   * Range -2141483648 - 2147483647
+   */
   get range(): [number, number] {
     return [...Int.RANGE] as [number, number];
   }
@@ -54,31 +57,15 @@ export class Int extends AbstractIntType {
   }
 
   public toShortInt(): ShortInt {
-    if (this._value <= ShortInt.RANGE[0]) {
-      return new ShortInt(ShortInt.RANGE[0]);
-    } else if (this._value >= ShortInt.RANGE[1]) {
-      return new ShortInt(ShortInt.RANGE[1]);
-    } else {
-      return new ShortInt(this._value);
-    }
+    return ShortInt.createInst(this._value);
   }
 
   public toUnsignedInt(): UnsignedInt {
-    if (this._value <= UnsignedInt.RANGE[0]) {
-      return new UnsignedInt(UnsignedInt.RANGE[0]);
-    } else {
-      return new UnsignedInt(this._value);
-    }
+    return UnsignedInt.createInst(this._value);
   }
 
   public toUnsignedShortInt(): UnsignedShortInt {
-    if (this._value <= UnsignedShortInt.RANGE[0]) {
-      return new UnsignedShortInt(UnsignedShortInt.RANGE[0]);
-    } else if (this._value >= UnsignedShortInt.RANGE[1]) {
-      return new UnsignedShortInt(UnsignedShortInt.RANGE[1]);
-    } else {
-      return new UnsignedShortInt(this._value);
-    }
+    return UnsignedShortInt.createInst(this._value);
   }
 
   public toFloat(): Float {

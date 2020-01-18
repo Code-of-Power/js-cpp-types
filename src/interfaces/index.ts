@@ -6,9 +6,6 @@ export interface INumberType extends Number {
   value: number;
   range: [number, number];
 
-  valueOf(): number;
-  toString(): string;
-
   // ---Mathematics---
 
   add(term: INumberType | number): AbstractIntType;

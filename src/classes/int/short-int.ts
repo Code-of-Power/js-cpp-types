@@ -3,7 +3,7 @@ import { out_of_range, type_mismatch } from '../../functions';
 import { INumberType } from '../../interfaces';
 import { AbstractIntType } from '../abstract/abstract-integer';
 import { Float, LongFloat } from '../float';
-import { Char, Int } from '../int';
+import { Char, Int, UnsignedInt, UnsignedShortInt } from '../int';
 
 export class ShortInt extends AbstractIntType implements INumberType {
   /**
@@ -54,27 +54,29 @@ export class ShortInt extends AbstractIntType implements INumberType {
       return new ShortInt(value);
     }
   }
-  /**
-   * Conversion to type Int
-   */
-  public toInt(): Int {
-    return new Int(this._value);
-  }
-  /**
-   * Conversion to type Float
-   */
-  public toFloat(): Float {
-    return new Float(this._value);
-  }
-  /**
-   * Conversion to type LongFloat
-   */
-  public toLongFloat(): LongFloat {
-    return new LongFloat(this._value);
-  }
 
   public toChar(): Char {
     return Char.createInst(this._value);
+  }
+
+  public toUnsignedShortInt() {
+    return UnsignedShortInt.createInst(this._value);
+  }
+
+  public toInt(): Int {
+    return new Int(this._value);
+  }
+
+  public toUnsignedInt() {
+    return UnsignedInt.createInst(this._value);
+  }
+
+  public toFloat(): Float {
+    return new Float(this._value);
+  }
+
+  public toLongFloat(): LongFloat {
+    return new LongFloat(this._value);
   }
 
   // ---Mathematics---

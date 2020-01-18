@@ -55,11 +55,7 @@ export class UnsignedInt extends AbstractIntType implements INumberType {
   }
 
   public toUnsignedShortInt(): UnsignedShortInt {
-    if (this._value > UnsignedShortInt.RANGE[1]) {
-      return new UnsignedShortInt(UnsignedShortInt.RANGE[1]);
-    } else {
-      return new UnsignedShortInt(this._value);
-    }
+    return UnsignedShortInt.createInst(this._value);
   }
 
   public toInt(): Int {
