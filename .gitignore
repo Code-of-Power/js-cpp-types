@@ -1,4 +1,5 @@
 # Foolder ignore
+**/build
 node_modules
 dist
 docs

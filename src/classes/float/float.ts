@@ -1,7 +1,9 @@
-import { out_of_range, type_mismatch } from '../../functions';
+import { Char, Int, ShortInt, UnsignedInt, UnsignedShortInt } from '../int';
 
+import { out_of_range } from '../../functions';
 import { INumberType } from '../../interfaces';
 import { AbstractFloatType } from '../abstract/abstract-float';
+import { LongFloat } from './long-float';
 
 export class Float extends AbstractFloatType {
   static RANGE: [number, number] = [-2147483648, 2147483647];
@@ -35,6 +37,30 @@ export class Float extends AbstractFloatType {
     } else {
       return new Float(value);
     }
+  }
+/*
+  public toChar(): Char {
+    return new Char(this._value);
+  }
+
+  public toShortInt(): ShortInt {
+    return new ShortInt(this._value);
+  }
+
+  public toUnsignedShortInt(): UnsignedShortInt {
+    return new UnsignedShortInt(this._value);
+  }
+
+  public toInt(): Int {
+    return new Int(this._value);
+  }
+
+  public toUnsignedInt() {
+    return new UnsignedInt(this._value);
+  }
+*/
+  public toLongFloat(): LongFloat {
+    return new LongFloat(this._value);
   }
 
   // ---Mathematics---

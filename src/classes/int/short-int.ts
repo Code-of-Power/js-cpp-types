@@ -121,6 +121,7 @@ export class ShortInt extends AbstractIntType implements INumberType {
   // ---Shifts---
 
   public shiftLeft(posCount: number) {
+    // TODO
     const value = this._value << posCount;
     if (value >= ShortInt.RANGE[1]) {
       return new ShortInt(value & ShortInt.RANGE[1]);
@@ -130,24 +131,29 @@ export class ShortInt extends AbstractIntType implements INumberType {
   }
 
   public shiftRight(posCount: number) {
+    // TODO
     return new ShortInt(this._value >> posCount);
   }
 
   // ---Binary---
 
   public binAnd(arg: INumberType | number) {
+    // TODO
     return ShortInt.createInst(this._value & arg.valueOf());
   }
 
   public binOr(arg: INumberType | number) {
+    // TODO
     return ShortInt.createInst(this._value | arg.valueOf());
   }
 
   public binNot() {
+    // TODO
     return ShortInt.createInst(~this._value);
   }
 
   public xor(arg: INumberType | number) {
+    // TODO
     return ShortInt.createInst(this._value ^ arg.valueOf());
   }
 
