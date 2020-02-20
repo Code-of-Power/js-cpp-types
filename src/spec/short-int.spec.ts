@@ -63,21 +63,21 @@ describe('Test ShortInt type', () => {
   // ---Shifts---
 
   test('SHIFT (>>)', () =>
-    expect(new ShortInt(3).shiftRight(1).value).toBe(3 >> 1));
+    expect(new ShortInt(3).shiftRight(1).value).toBe(3 >> 1)); // TODO
 
   test('SHIFT (<<)', () => {
     expect(new ShortInt(3).shiftLeft(1).value).toBe(3 << 1);
     expect(new ShortInt(ShortInt.RANGE[1]).shiftLeft(1).value).toBe(
       ShortInt.RANGE[1] - 1,
-    );
+    ); // TODO
   });
 
   // ---Binary---
 
-  test('OR (|)', () => expect(new ShortInt(10).binOr(8).value).toBe(10 | 8));
-  test('AND (&)', () => expect(new ShortInt(10).binAnd(8).value).toBe(10 & 8));
-  test('NOT (~)', () => expect(new ShortInt(5).binNot().value).toBe(~5));
-  test('XOR (^)', () => expect(new ShortInt(5).xor(1).value).toBe(5 ^ 1));
+  test('OR (|)', () => expect(new ShortInt(10).binOr(8).value).toBe(10 | 8)); // TODO
+  test('AND (&)', () => expect(new ShortInt(10).binAnd(8).value).toBe(10 & 8)); // TODO
+  test('NOT (~)', () => expect(new ShortInt(5).binNot().value).toBe(~5)); // TODO
+  test('XOR (^)', () => expect(new ShortInt(5).xor(1).value).toBe(5 ^ 1)); // TODO
 
   // ---Logic---
 
